@@ -11,9 +11,9 @@ import "@picocss/pico";
 export default function Cards({showRulesCard, cardText, rulesText}) {
 
   return (
-    <div className = "card-holder" >
+    <article className = "card-holder" >
         {showRulesCard ? <RulesCard /> : <GameCards cardText = {cardText} />}
-    </div>
+    </article>
   );
   
           
