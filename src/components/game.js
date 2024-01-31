@@ -32,10 +32,10 @@ export default function NewGame(){
   }
     
     return(
-        <header className="App-header">
+        <article className="gameSpace">
           <Cards showRulesCard={showRulesCard} cardText={cardText} />
           {showCardCyclerButton && <CardCyclerButton onClick={handleCyclerClick} />}
           {!showCardCyclerButton && <HideButton onClick={handleHideClick} />}
-        </header>
+        </article>
     )
 }
