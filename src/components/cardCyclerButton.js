@@ -1,5 +1,6 @@
 import React from 'react';
 import "@picocss/pico";
+import '../app/game.css';
 //import { cardCycler } from './GameCards';
 
 

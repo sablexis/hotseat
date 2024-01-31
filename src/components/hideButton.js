@@ -1,7 +1,6 @@
 import React from 'react';
 import "@picocss/pico";
-
-
+import "./game.css"
 
 function HideButton(props) {
     return (
