@@ -7,7 +7,7 @@ import HideButton from "./hideButton";
 import CardCyclerButton from "./CardCyclerButton";
 import { getRandomItem } from "./CardData";
 import RulesCard from "./RulesCard";
-
+import "@picocss/pico";
 export default function NewGame(){
     
   const [showRulesCard, setshowRulesCard] = useState(true)

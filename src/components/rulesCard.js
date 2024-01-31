@@ -1,3 +1,4 @@
+import "@picocss/pico";
 import '../app/page.module.css';
 
 export default function RulesCard() {

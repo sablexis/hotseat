@@ -3,6 +3,7 @@ import Script from "next/script";
 import styles from "./page.module.css";
 import React from "react";
 import NewGame from "@/components/game";
+import "@picocss/pico";
 
 export default function Home() {
   return(

@@ -2,6 +2,7 @@ import GameCards from "./GameCards";
 import RulesCard from './RulesCard';
 import React from 'react';
 import '../app/page.module.css';
+import "@picocss/pico";
 
 //import {cardCycler} from './GameCards';
 
