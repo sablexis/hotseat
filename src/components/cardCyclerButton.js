@@ -5,7 +5,7 @@ import "@picocss/pico";
 
 function CardCyclerButton(props) {
     return(
-        <button className = "newCard-button" onClick={props.onClick}>
+        <button className = "newCard-button" class= "outline" onClick={props.onClick}>
             <i className="fa-solid fa-circle-plus"></i>
         </button>
     )
