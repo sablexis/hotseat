@@ -8,6 +8,8 @@ import CardCyclerButton from "./CardCyclerButton";
 import { getRandomItem } from "./CardData";
 import RulesCard from "./RulesCard";
 import "@picocss/pico";
+import "./game.css"
+
 export default function NewGame(){
     
   const [showRulesCard, setshowRulesCard] = useState(true)
