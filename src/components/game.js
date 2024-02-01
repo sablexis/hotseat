@@ -12,15 +12,15 @@ import "./game.css"
 export default function NewGame(){
     
   const [showRulesCard, setshowRulesCard] = useState(true)
-  const [showCardCyclerButton, setshowCardCyclerButton] = useState(false)
+  const [showCardCyclerButton, setshowCardCyclerButton] = useState(true)
   const [cardText, setCardText] = useState('')
 
-  function handleHideClick(){
+  /* function handleHideClick(){
       
     setshowRulesCard(false);
     setshowCardCyclerButton(true);
     
-  }
+  } */
 
 
   function handleCyclerClick(){
@@ -32,9 +32,9 @@ export default function NewGame(){
     
     return(
         <div className="gameSpace">
-          <Cards showRulesCard={showRulesCard} cardText={cardText} />
+          <Cards cardText={cardText} />
           {showCardCyclerButton && <CardCyclerButton onClick={handleCyclerClick} />}
-          {!showCardCyclerButton && <HideButton onClick={handleHideClick} />}
+          {/* {!showCardCyclerButton && <HideButton onClick={handleHideClick} />} */}
         </div>
     )
 }
