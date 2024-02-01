@@ -1,4 +1,4 @@
-import "@picocss/pico";
+
 import '../app/page.module.css';
 import "./game.css";
 

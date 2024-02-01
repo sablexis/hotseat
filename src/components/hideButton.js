@@ -1,5 +1,5 @@
 import React from 'react';
-import "@picocss/pico";
+import { Button } from '@mui/material';
 import "./game.css"
 
 function HideButton(props) {

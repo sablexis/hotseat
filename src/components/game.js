@@ -7,7 +7,6 @@ import HideButton from "./hideButton";
 import CardCyclerButton from "./CardCyclerButton";
 import { getRandomItem } from "./CardData";
 import RulesCard from "./RulesCard";
-import "@picocss/pico";
 import "./game.css"
 
 export default function NewGame(){
@@ -32,10 +31,10 @@ export default function NewGame(){
   }
     
     return(
-        <article className="gameSpace">
+        <div className="gameSpace">
           <Cards showRulesCard={showRulesCard} cardText={cardText} />
           {showCardCyclerButton && <CardCyclerButton onClick={handleCyclerClick} />}
           {!showCardCyclerButton && <HideButton onClick={handleHideClick} />}
-        </article>
+        </div>
     )
 }

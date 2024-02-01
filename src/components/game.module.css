@@ -1,0 +1,38 @@
+
+
+card-holder {
+    min-height: calc(100vh - 65rem);
+}
+
+.rules-card {
+    min-height: calc(100vh - 75rem);
+    max-height: calc(100vh - 7rem);
+    padding: 1rem 0;
+    background-color: transparent;
+}
+
+.gameCards{
+    position: inherit;
+    font-family: 'Gaegu', cursive;
+    font-size: 7vmin;
+    color: hsl(42, 15%, 13%);
+    text-align: center;
+    width: 70vmin;
+    aspect-ratio: 5/7;
+    border-radius: 2vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .gameCards > p {
+    color: hsl(360, 67%, 44%);
+    margin-top: 35vmin;
+    margin-left: 2vmin;
+    margin-right: 2vmin;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+  }  
