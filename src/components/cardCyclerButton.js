@@ -1,13 +1,17 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { IconButton } from '@mui/material';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 //import { cardCycler } from './GameCards';
 
 
 function CardCyclerButton(props) {
     return(
-        <button className = "newCard-button" class= "outline" onClick={props.onClick}>
-            <i className="fa-solid fa-circle-plus"></i>
-        </button>
+        <IconButton
+        color= "primary" 
+        size = "large"
+        onClick={props.onClick}>
+            <RestartAltIcon fontSize='inherit'/>
+        </IconButton>
     )
 }
 

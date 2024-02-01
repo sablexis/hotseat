@@ -106,12 +106,8 @@
   margin-top: 110vmin;
   display: flex;
   justify-content: center;
-  height: 8vmin;
   aspect-ratio: 1/1;
   color: hsl(360, 67%, 44%);
-  font-size: 6vmin;
-  border: hsl(40, 23%, 97%);
-  background-color: hsl(40, 23%, 97%);
   align-items: center;
   
 }

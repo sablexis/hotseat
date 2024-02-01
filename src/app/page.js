@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Script from "next/script";
 import { IconButton, PropTypes } from "@mui/material";
-import styles from "./page.module.css";
 import React from "react";
 import NewGame from "@/components/game";
 import { Dialog, DialogTitle, List, ListItem } from "@mui/material";
@@ -24,7 +23,7 @@ export default function Home() {
   return(
     <div>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <Script src="https://kit.fontawesome.com/f7b7deab76.js" crossorigin="anonymous"></Script>
+    {/* <Script src="https://kit.fontawesome.com/f7b7deab76.js" crossorigin="anonymous"></Script> */}
     <Dialog open = {open}>
       <DialogTitle align="center">Hot Seat:<br></br> The Drinking Game 🔥</DialogTitle>
       <List>

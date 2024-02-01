@@ -4,18 +4,17 @@ card-holder {
     min-height: calc(100vh - 65rem);
 }
 
-.rules-card {
-    min-height: calc(100vh - 75rem);
-    max-height: calc(100vh - 7rem);
-    padding: 1rem 0;
-    background-color: transparent;
+.gameSpace{
+  display: flex;
+  flex-direction: column-reverse;
+  min-height: 100vh;
 }
+
 
 .gameCards{
     position: inherit;
     font-family: 'Gaegu', cursive;
     font-size: 7vmin;
-    color: hsl(42, 15%, 13%);
     text-align: center;
     width: 70vmin;
     aspect-ratio: 5/7;
