@@ -15,25 +15,13 @@ import { sizing } from '@mui/system';
 export default function Cards({cardText}) {
 
   return (
-  <div>
-    <Card variant="outlined"
-    sx={{
-      boxShadow: 1,
-      borderRadius: 2,
-      top: 1/2,
-      p: 2,
-      minWidth: 300,
-      minHeight: 8/10,
-      zIndex: 'modal'
-    }}>
-      <CardContent>
+    <div className="container">
+      <div className="cardWContent">
       {cardText}
-      </CardContent>
-    </Card>
-  </div>
-
-    
+      </div>
+    </div>
   
+
   );
   
           
