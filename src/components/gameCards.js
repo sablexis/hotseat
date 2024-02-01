@@ -1,5 +1,6 @@
 import { cardList } from './CardData.js';
 import  Cards from './Cards.js';
+import "./game.css"
 
 
 export default function GameCards({cardText}) {

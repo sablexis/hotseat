@@ -6,20 +6,18 @@ import Cards from './cards';
 import HideButton from "./hideButton";
 import CardCyclerButton from "./CardCyclerButton";
 import { getRandomItem } from "./CardData";
-import RulesCard from "./RulesCard";
+import { IconButton } from '@mui/material';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import "./game.css"
+import useTheme from '@mui/material';
+
 
 export default function NewGame(){
     
-  const [showRulesCard, setshowRulesCard] = useState(true)
-  const [showCardCyclerButton, setshowCardCyclerButton] = useState(false)
+  const [showCardCyclerButton, setshowCardCyclerButton] = useState(true)
   const [cardText, setCardText] = useState('')
 
-  function handleHideClick(){
-      
-    setshowRulesCard(false);
-    setshowCardCyclerButton(true);
-    
-  }
+ 
 
 
   function handleCyclerClick(){
@@ -30,10 +28,17 @@ export default function NewGame(){
   }
     
     return(
-        <header className="App-header">
-          <Cards showRulesCard={showRulesCard} cardText={cardText} />
-          {showCardCyclerButton && <CardCyclerButton onClick={handleCyclerClick} />}
-          {!showCardCyclerButton && <HideButton onClick={handleHideClick} />}
-        </header>
-    )
+      
+
+        <div className="gameSpace">
+
+              <Cards cardText={cardText} />
+              <IconButton size='large'
+              color='secondary'
+              onClick={handleCyclerClick}>
+                    <RestartAltIcon fontSize='inherit'/>
+              </IconButton>
+            {/* <CardCyclerButton onClick={handleCyclerClick} /> */}
+        </div>
+    );
 }

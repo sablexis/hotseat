@@ -1,17 +1,27 @@
 import GameCards from "./GameCards";
-import RulesCard from './RulesCard';
 import React from 'react';
-import '../app/page.module.css';
+import "./game.css"
+import { Card, Grid } from "@mui/material";
+import { Container } from "@mui/system";
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import { sizing } from '@mui/system';
+
+
 
 //import {cardCycler} from './GameCards';
 
 
-export default function Cards({showRulesCard, cardText, rulesText}) {
+export default function Cards({cardText}) {
 
   return (
-    <div className = "card-holder" >
-        {showRulesCard ? <RulesCard /> : <GameCards cardText = {cardText} />}
+    <div className="container">
+      <div className="cardWContent">
+      {cardText}
+      </div>
     </div>
+  
+
   );
   
           
