@@ -1,3 +1,27 @@
+# Hot Seat: The Game 🔥
+
+
+
+>  A digital card game to really get the conversation going.
+
+A fun little test project made in ReactJS to make the pre that much easier than getting out a whole deck of cards, complete with 102 (!) questions.
+
+## Features
+
+Generate a new question on each click.
+
+## Contributing
+If you'd like to contribute to this project, please fork the repository and use a feature branch. Any changes are warmly welcomed 💛
+
+
+## Feature Request
+Please feel free to submit feature request [here](https://google.com)
+
+  - [ ] Ability for users to submit their own cards.
+  - [ ] Account creation, build your own deck.
+  - [ ] Play with friends online.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -15,10 +39,6 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
