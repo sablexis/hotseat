@@ -1,3 +1,5 @@
+'use server';
+
 import express from 'express';
 import * as React from 'react';
 import * as ReactDOMServer from 'react-dom/server';
