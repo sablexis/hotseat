@@ -3,7 +3,7 @@
 //import 'src/app/page.js';
 import React, {useState} from 'react';
 import Cards from './cards';
-import { getRandomItem } from "./CardData";
+import { getRandomItem } from './cardData';
 import { IconButton } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import "./game.css"
