@@ -3,8 +3,6 @@
 //import 'src/app/page.js';
 import React, {useState} from 'react';
 import Cards from './cards';
-import HideButton from "./hideButton";
-import CardCyclerButton from "./CardCyclerButton";
 import { getRandomItem } from "./CardData";
 import { IconButton } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';

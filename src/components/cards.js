@@ -1,4 +1,3 @@
-import GameCards from "./GameCards";
 import React from 'react';
 import "./game.css"
 import { Card, Grid } from "@mui/material";
