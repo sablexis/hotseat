@@ -8,11 +8,7 @@ export default async function StartPage(){
     return(
         <div>
             Home
-            {session ? (<Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
-                ) : (
-
-            <Link href="/api/auth/signin?callbackUrl=/"></Link> )
-            } 
+            
         </div>
     )
 }

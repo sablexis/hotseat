@@ -20,12 +20,19 @@
   align-items: center;
   width: 75vmin;
   aspect-ratio: 5/7;
+  padding: 1em;
 }
 
 .newGameBtnDiv {
   margin: 2vh;
   padding: 5;
   
+}
+
+.button{
+  margin: 10;
+  padding: 7em;
+  border-radius: 3;
 }
 
 .gameSpace {
