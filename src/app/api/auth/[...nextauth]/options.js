@@ -1,7 +1,9 @@
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth/next";
 
 export const options = {
+    secret: process.env.NEXT_AUTH_SECRET,
     providers: [
         GitHubProvider({
             profile(profile){
@@ -17,7 +19,7 @@ export const options = {
                     role: userRole,
                 };
             },
-            clientID: process.env.GITHUB_ID,
+            clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
 
         }),
@@ -32,7 +34,7 @@ export const options = {
                     role: userRole,
                 };
             },
-            clientID: process.env.GOOGLE_ID,
+            clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
         }),
 
@@ -48,4 +50,6 @@ export const options = {
             return session;
         },
     },
-};
+}
+
+export default NextAuth(options)
