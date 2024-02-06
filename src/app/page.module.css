@@ -3,7 +3,37 @@
   background-color: hsl(40, 23%, 97%);
 }
 
+.Home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1/2;
+}
 
+.firstPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75vmin;
+  aspect-ratio: 5/7;
+  padding: 1em;
+}
+
+.newGameBtnDiv {
+  margin: 2vh;
+  padding: 5;
+  
+}
+
+.button{
+  margin: 10;
+  padding: 7em;
+  border-radius: 3;
+}
 
 .gameSpace {
   background-color: hsl(40, 23%, 97%);
