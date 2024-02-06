@@ -5,7 +5,6 @@ import Script from "next/script";
 import { IconButton, PropTypes } from "@mui/material";
 import React from "react";
 import NewGame from "@/components/game";
-import StartPage from "@/pages/Home";
 import { Dialog, DialogTitle, List, ListItem } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Button } from "@mui/base";
