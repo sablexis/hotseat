@@ -11,8 +11,12 @@ const Member = async () => {
 
   return (
     <div>
-      <h1>Member</h1>
+      <h1>Member Dashboard</h1>
+      <div>
+        <h3>My decks:</h3>
+      </div>
     </div>
+
   );
 };
 
