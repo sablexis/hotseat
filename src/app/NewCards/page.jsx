@@ -1,8 +1,45 @@
-import React from "react";
+"use client"
+
+import React, {useState} from "react";
 import NewCardInputForm from "@/components/newCardInputForm";
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+import {Decks} from "../models/Decks";
+
 
 export default function NewCards(){
+
+    const session =  getServerSession(options);
+
+    if (!session) {
+        redirect("/api/auth/signin?callbackUrl=/NewCards");
+    }
+
+    //const { data: session } = useSession();
+    
+
+    if (!session) {
+      redirect("/api/auth/signin?callbackUrl=/NewCards");
+    }
+
+const CreateDeck = () => {
+    const [title, setTitle] = useState('');
+    const [questions, setQuestions] = useState([]);
+  
+    const handleAddQuestion = (newQuestion) => {
+      setQuestions([...questions, newQuestion]);
+    };
+
+    const handleCreateDeck = async () =>{
+        if (title && questions.length > 0) {
+            const newDeck = new Deck({ title, questions, user: session.user.id });
+            await newDeck.save();
+    }
+    };
+};
 
     return(
         <div>

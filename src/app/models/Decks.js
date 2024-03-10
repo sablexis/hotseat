@@ -1,11 +1,14 @@
-import mongoose, {Schema} from "mongoose";
+const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URI)
-mongoose.Promise = global.Promise
+main().catch(err => console.log(err));
+
+async function main() {
+    mongoose.connect('mongodb://127.0.0.1:27017/hotseat');
+    mongoose.Promise = global.Promise
 
 const decksSchema = new Schema({
     user: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
@@ -13,5 +16,11 @@ const decksSchema = new Schema({
     questions: [{body: String}]
 
 })
+}
+
+// mongoose.connect(process.env.MONGO_URI)
+
 
 const Decks = mongoose.models.Decks || mongoose.model("Decks", decksSchema);
+
+export default Decks;

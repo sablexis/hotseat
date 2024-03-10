@@ -1,17 +1,28 @@
-import mongoose, {Schema} from "mongoose";
+const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URI)
-mongoose.Promise = global.Promise
+main().catch(err => console.log(err));
 
-const userSchema = new Schema({
-    name: String,
-    email: String,
-    password: String,
-},{
-    timestamps: true,
+
+async function main() {
+    await mongoose.connect('mongodb://127.0.0.1:27017/hotseat');
+    mongoose.Promise = global.Promise
+  
+    const userSchema = new mongoose.Schema({
+        name: String,
+        email: String,
+        password: String,
+    },{
+        timestamps: true,
+        decks: [{type: mongoose.Schema.Types.ObjectID, ref: 'Decks'}]
+    }
+    );
+    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+    const User = mongoose.model('User', userSchema);
+
 }
-);
 
-const User = mongoose.models.User || mongoose.model("User", userSchema);
 
-export default User;
+
+
+
+//export default User;
