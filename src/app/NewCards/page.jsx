@@ -12,18 +12,12 @@ import {Decks} from "../models/Decks";
 
 export default function NewCards(){
 
-    const session =  getServerSession(options);
+    const {data: session, status} = useSession()
 
-    if (!session) {
+    if (status != "authenticated") {
         redirect("/api/auth/signin?callbackUrl=/NewCards");
     }
 
-    //const { data: session } = useSession();
-    
-
-    if (!session) {
-      redirect("/api/auth/signin?callbackUrl=/NewCards");
-    }
 
 const CreateDeck = () => {
     const [title, setTitle] = useState('');
