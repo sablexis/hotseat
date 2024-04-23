@@ -14,7 +14,7 @@ export default function NewCards(){
 
     const {data: session, status} = useSession()
 
-    if (status != "authenticated") {
+   /*  if (status != "authenticated") {
         redirect("/api/auth/signin?callbackUrl=/NewCards");
     }
 
@@ -33,7 +33,7 @@ const CreateDeck = () => {
             await newDeck.save();
     }
     };
-};
+}; */
 
     return(
         <div>

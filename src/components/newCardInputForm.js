@@ -9,20 +9,42 @@ import { useState } from "react";
 import Link from "next/link";
 
 
+
 export default function NewCardInputForm(){
 
-    const [newCardText, setNewCardText] = useState("");
-
-
-    const handleClick = () => {
-        setNewCardText(inputText);
-    }
+        const [title, setTitle] = useState("");
+        const [questions, setQuestions] = useState([]);
+      
+        const handleTitleChange = (event) => setTitle(event.target.value);
+        const handleQuestionChange = (index, event) => {
+          const updatedQuestions = [...questions];
+          updatedQuestions[index] = event.target.value;
+          setQuestions(updatedQuestions);
+        };
+      
+        const addQuestion = () => setQuestions([...questions, ""]);
+      
+        const handleSubmit = (event) => {
+          event.preventDefault();
+          onSubmit({ title, questions });
+        };
+    
+    
 
     return(
 
         <div>
+            <form onSubmit = {handleSubmit}>
             <h1>New Card</h1>
             <Paper elevation={3}>
+            <div className="deckTitleInput">
+            <TextField id="filled-basic"
+                color = "secondary" 
+                label="Deck Title" 
+                variant="outlined"
+                onChange={handleTitleChange}>
+                </TextField> 
+            </div>
             <div className="cardTextInput">
                 <TextField id="outlined-basic"
                 color = "secondary" 
@@ -42,6 +64,7 @@ export default function NewCardInputForm(){
                     Add card
                 </Button>
             </Paper>
+            </form>
         </div>
 
     );

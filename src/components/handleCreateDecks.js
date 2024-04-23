@@ -3,13 +3,19 @@ import React from 'react';
 import { useSession } from 'next-auth/react';
 
 
-const {data: session, status} = useSession()
+const {data: session, status} = useSession();
 
-const handleCreateDeck = async (title, questions) => {
-    const newDeck = new Decks ({
+
+const createDeck = async ({title, questions}) => {
+    try {
+        const newDeck = new Decks ({
         title,
         questions,
-        user: session.user.id
+        user: session?.user?.id
     });
     await newDeck.save();
+    } catch (error){
+        console.error("Error creating deck:", error);
+    }
+    
 }
