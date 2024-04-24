@@ -6,6 +6,13 @@ async function main() {
     mongoose.connect('mongodb://127.0.0.1:27017/hotseat');
     mongoose.Promise = global.Promise
 
+const cardSchema = new mongoose.Schema({
+    cardText: {
+        type: String,
+        required: true
+    }
+    });
+
 const decksSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -13,7 +20,7 @@ const decksSchema = new mongoose.Schema({
         required: true,
     },
     title: String, 
-    questions: [{body: String}]
+    cards: [{body: String}]
 
 })
 
