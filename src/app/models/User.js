@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose/browser');
+
 
 main().catch(err => console.log(err));
 
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/hotseat');
+    await mongoose.connect('mongodb://user:password@127.0.0.1:27017/hotseat', { autoIndex: false });
     mongoose.Promise = global.Promise
   
     const userSchema = new mongoose.Schema({

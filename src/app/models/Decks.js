@@ -1,9 +1,10 @@
+const { type } = require('express/lib/response');
 const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
 
 async function main() {
-    mongoose.connect('mongodb://127.0.0.1:27017/hotseat');
+    await mongoose.connect('mongodb://user:password@127.0.0.1:27017/hotseat');
     mongoose.Promise = global.Promise
 
 const cardSchema = new mongoose.Schema({
@@ -19,8 +20,12 @@ const decksSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    title: String, 
-    cards: [{body: String}]
+    name: {
+        type: String,
+        required: true},
+    strings:[{
+        type: String
+    }]
 
 })
 
