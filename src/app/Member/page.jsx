@@ -23,7 +23,7 @@ const Member = async () => {
       <div className="decksContainer">
       <decksList />
       <Divider orientation="vertical" flexItem />
-      <Button variant="contained" endIcon={<AddBoxIcon />}>
+      <Button variant="contained" endIcon={<AddBoxIcon />} href = "/NewDeck">
       New Deck
       </Button>
 
