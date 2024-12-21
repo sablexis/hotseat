@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
+import DecksList from "@/components/decksList";
+
 
 const Member = async () => {
   const session = await getServerSession(options);
@@ -10,9 +12,10 @@ const Member = async () => {
   }
 
   return (
-    <div>
-      <h1>Member</h1>
+    <div className="container mx-auto">
+        <DecksList />
     </div>
+
   );
 };
 
