@@ -9,11 +9,13 @@ import { Dialog, DialogTitle, List, ListItem } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Button } from "@mui/base";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 
 
 
 export default function StartAGame() {
+  const { data: session } = useSession();
   const [open, setOpen] = useState(true);
 
 

@@ -1,13 +1,10 @@
 "use client"
 
 import React, {useState} from "react";
-import NewCardInputForm from "@/components/newCardInputForm";
+
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
+
 import { useSession } from "next-auth/react";
-import {Decks} from "../models/Decks";
 
 
 export default function NewCards(){
@@ -37,7 +34,7 @@ const CreateDeck = () => {
 
     return(
         <div>
-            <NewCardInputForm/>
+            
             <Link href = "/Member">Back</Link>
         </div>
     )

@@ -1,13 +1,8 @@
-const mongoose = require('mongoose/browser');
+const mongoose = require('mongoose');
 
 
-main().catch(err => console.log(err));
 
 
-async function main() {
-    await mongoose.connect('mongodb://user:password@127.0.0.1:27017/hotseat', { autoIndex: false });
-    mongoose.Promise = global.Promise
-  
     const userSchema = new mongoose.Schema({
         name: String,
         email: String,
@@ -18,12 +13,12 @@ async function main() {
     }
     );
     // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-    const User = mongoose.model('User', userSchema);
-
-}
+    export default mongoose.models.User || mongoose.model('User', userSchema);
 
 
 
 
 
-//export default User;
+
+
+//;

@@ -1,9 +1,7 @@
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import DecksList from "@/components/decksList";
 
 
 const Member = async () => {
@@ -14,20 +12,8 @@ const Member = async () => {
   }
 
   return (
-    <div>
-      <h1>Member Dashboard</h1>
-      <div>
-        <h3>My decks:</h3>
-      </div>
-      
-      <div className="decksContainer">
-      <decksList />
-      <Divider orientation="vertical" flexItem />
-      <Button variant="contained" endIcon={<AddBoxIcon />} href = "/newDeckCreator">
-      New Deck
-      </Button>
-
-      </div>
+    <div className="container mx-auto">
+        <DecksList />
     </div>
 
   );

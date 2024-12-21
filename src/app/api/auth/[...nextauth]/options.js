@@ -21,6 +21,7 @@ export const options = {
                 return{
                     ...profile,
                     role: userRole,
+                    id: profile.id.toString(),
                 };
             },
             clientId: process.env.GITHUB_ID,
@@ -86,11 +87,17 @@ export const options = {
         ],
         callbacks: {
           async jwt({ token, user }) {
-            if (user) token.role = user.role;
+            if (user) {
+              token.role = user.role;
+              token.id = user._id || user.id;
+            }
             return token;
           },
           async session({ session, token }) {
-            if (session?.user) session.user.role = token.role;
+            if (session?.user) {
+              session.user.role = token.role;
+              session.user.id = token.id;
+            }
             return session;
           },
         },

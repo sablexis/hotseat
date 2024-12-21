@@ -1,9 +1,9 @@
-import CreateDeck from "@/components/CreateDeck";
+import DeckCreator from '@/components/DeckCreator';
 import Link from "next/link";
 
 export default function newDeckCreator() {
     return <div>
-        <CreateDeck/>
+        <DeckCreator />
         <Link href = "/Member">Back</Link>
 
     </div>
