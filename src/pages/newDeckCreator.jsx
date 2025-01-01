@@ -1,10 +1,13 @@
 import DeckCreator from '@/components/DeckCreator';
 import Link from "next/link";
+import { Button } from '@mui/material';
 
 export default function newDeckCreator() {
     return <div>
         <DeckCreator />
-        <Link href = "/Member">Back</Link>
+        <Button variant="contained" href="/Member">
+            Back
+        </Button>
 
     </div>
 }

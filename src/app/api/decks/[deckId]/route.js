@@ -142,3 +142,59 @@ export async function DELETE(request, { params }) {
         );
     }
 }
+
+export async function PATCH(request, { params }) {
+    try {
+        // 1. Check authentication
+        const session = await getServerSession(options);
+        if (!session?.user) {
+            return Response.json(
+                { error: "Not authenticated" },
+                { status: 401 }
+            );
+        }
+
+        // 2. Connect to database
+        await dbConnect();
+        
+        // 3. Get request data
+        const { deckId } = params;
+        const body = await request.json();
+        
+        // 4. Validate deckId format
+        if (!mongoose.Types.ObjectId.isValid(deckId)) {
+            return Response.json(
+                { error: "Invalid deck ID format" },
+                { status: 400 }
+            );
+        }
+
+        // 5. Update deck
+        const updatedDeck = await Decks.findOneAndUpdate(
+            {
+                _id: deckId,
+                user: session.user.id  // Ensure user owns this deck
+            },
+            { $set: body },  // Update with new data
+            { new: true }    // Return updated document
+        );
+
+        // 6. Check if deck was found and updated
+        if (!updatedDeck) {
+            return Response.json(
+                { error: "Deck not found" },
+                { status: 404 }
+            );
+        }
+
+        // 7. Return success
+        return Response.json(updatedDeck);
+
+    } catch (error) {
+        console.error('Error updating deck:', error);
+        return Response.json(
+            { error: error.message },
+            { status: 500 }
+        );
+    }
+}
