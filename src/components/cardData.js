@@ -204,9 +204,38 @@ const cardList = [{
 {text: "Speech & Debate: Asker picks another player to rant  with current player for 30 seconds on a topic of Askers choosing."}
 ]
 
-function getRandomItem() {
-    const randomIndex = Math.floor(Math.random() * cardList.length);
-    return cardList[randomIndex];
+function getRandomItem(cards) {
+
+    /*
+     * First, validate that we have cards to work with
+     * Like checking if someone handed us a deck at all
+     */
+
+    if (!cards || cards.length == 0) {
+        throw new Error('Invalid Cards')
+    }
+    // Pick a random card from the deck
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    const selectedCard = cards[randomIndex]
+
+    /* 
+     * Check what type of card we're dealing with
+     * Like looking at the card to see if it's a regular card or special card
+     */
+
+    if (selectedCard && Object.hasOwn(selectedCard, 'text')) {
+        
+        return selectedCard.text;
+
+    } else if (typeof selectedCard === 'string'){
+        return selectedCard;
+    }
+
+    else {
+        throw new Error('Invalid format')
+    }
+  
 }
+
 
 export { cardList, getRandomItem}
