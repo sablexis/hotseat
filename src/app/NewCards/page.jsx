@@ -1,11 +1,11 @@
 "use client"
-
+// depreciated 
 import React, {useState} from "react";
 
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
-
+import { Button } from "@mui/material";
 
 export default function NewCards(){
 
@@ -34,8 +34,9 @@ const CreateDeck = () => {
 
     return(
         <div>
-            
-            <Link href = "/Member">Back</Link>
+            <Button variant="contained" href="/Member">
+               Back
+            </Button>
         </div>
     )
 

@@ -3,13 +3,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { Card, CardContent, Typography, Button, Box, CircularProgress, Alert } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, CircularProgress, Alert, Dialog, DialogTitle } from '@mui/material';
+import DeckDialog from './DeckDialog';
 
 const DecksList = () => {
   const { data: session } = useSession();
   const [decks, setDecks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedDeck, setSelectedDeck] = useState(null);
+  const [open, setOpen] = useState(false);
+
+
 
   useEffect(() => {
     const fetchDecks = async () => {
@@ -65,6 +70,12 @@ const DecksList = () => {
       </Alert>
     );
   }
+  
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedValue(null);
+  };
+
 
   return (
     <div className="p-4">
@@ -79,6 +90,8 @@ const DecksList = () => {
         </Link>
       </Box>
 
+      
+
       {decks.length === 0 ? (
         <Alert severity="info">
           You haven't created any decks yet. Create your first deck to get started!
@@ -86,7 +99,16 @@ const DecksList = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {decks.map((deck) => (
-            <Card key={deck._id} className="hover:shadow-lg transition-shadow">
+           
+            <Card key={deck._id} 
+              className="hover:shadow-lg transition-shadow"
+              onClick={() => {
+              setSelectedDeck(deck);
+              setOpen(true);
+              }}
+              >
+                
+                
               <CardContent>
                 <Typography variant="h6" component="h3" className="mb-2">
                   {deck.name}
@@ -102,6 +124,12 @@ const DecksList = () => {
           ))}
         </div>
       )}
+      <DeckDialog 
+        open={open}
+        onClose={() => setOpen(false)}
+        deck={selectedDeck}  // Pass the entire deck object
+      />
+
     </div>
   );
 };
