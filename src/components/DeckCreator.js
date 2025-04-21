@@ -1,3 +1,7 @@
+/**
+ * Functionality for users to create their own decks
+ */
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { cardList } from '@/components/cardData';

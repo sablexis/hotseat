@@ -1,3 +1,9 @@
+/**
+ * Main HotSeat functionality is taken care of here.
+ * Takes in array of either pre-defined cards or user created deck of cards
+ * 
+ */
+
 'use client';
 
 //import 'src/app/page.js';
@@ -11,8 +17,8 @@ import useTheme from '@mui/material';
 import { cardList } from './cardData';
 
 
-export default function NewGame({deck}){
-    
+export default function NewGame(){
+    // there is so much dead code here we should come back and clean this up
   const [showCardCyclerButton, setshowCardCyclerButton] = useState(true)
   const [cardText, setCardText] = useState('')
   const [deckOCards, setDeckOCards] = useState([])
@@ -25,38 +31,25 @@ export default function NewGame({deck}){
  * Initial deck setup, inital shuffle
  */
 
-// When component mounts OR new deck received:
+// When component mounts:
 useEffect(() => {
-  if (deck?.cards) {
-    const deckCopy = [...deck.cards];
-  
-    const shuffledDeckCopy = deckCopy.sort(() => 0.5 - Math.random());
-    setDeckOCards(shuffledDeckCopy);
-    setCurrIndex(0);
-    setIsShuffled(true);
-  
-  }
-}, [deck]); 
+  const shuffledDeckCopy = [...cardList].sort(() => 0.5 - Math.random());
+  setDeckOCards(shuffledDeckCopy);
+  setCardText(shuffledDeckCopy[0].text);
+  setIsShuffled(true);
+}, []); 
 
 
+/**
+ * function handleCyclerClick
+ * upon clicking cycle button populate cardText with random String from array of cards
+ * 
+ */
   function handleCyclerClick(){
       
-    if (currIndex >= deck.cards.length) {
-      // reshuffle
-      const deckCopy = [...deckOCards];
-
-      const shuffledDeckCopy = deckCopy.sort((a,b) => 0.5 - Math.random());
-      setDeckOCards(shuffledDeckCopy);
-      setCurrIndex(0);
-
-    }
-
-    else {
-      setCurrIndex(prevIndex => prevIndex + 1); 
-    }
-    const card = getRandomItem(deckOCards);
-    setCardText(card);
-    
+    const nextIndex = (currIndex + 1) % deckOCards.length;
+    setCurrIndex(nextIndex);
+    setCardText(deckOCards[nextIndex].text);
   }
     
     return(

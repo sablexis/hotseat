@@ -1,3 +1,7 @@
+/**
+ * card object, a container for card texts and card...cards? themselves
+ */
+
 import React from 'react';
 import "./game.css"
 import { Card, Grid } from "@mui/material";
