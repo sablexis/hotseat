@@ -48,13 +48,15 @@
   animation: bounce 1s infinite;
 }
 
-.button-container {
+.btn-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
   width: 100%;
   max-width: 300px;
+  
 }
+
 
 .firstPage {
   display: flex;
@@ -109,6 +111,7 @@
   padding: 20px;
 }
 
+
 .gameCards{
   width: 100%;
   padding: 24px;
@@ -133,6 +136,7 @@
 }
 
 .gameCards > p {
+  color: hsl(360, 67%, 44%);
   margin-top: 16px;
   margin-left: 16px;
   margin-right: 16px;

@@ -11,6 +11,10 @@ card-holder {
     background-color: transparent;
 }
 
+:root {
+  --card-content-color: hsl(360, 67%, 44%);
+}
+
 .gameCards{
     position: inherit;
     font-family: 'Gaegu', cursive;
@@ -27,7 +31,7 @@ card-holder {
   }
   
   .gameCards > p {
-    color: hsl(360, 67%, 44%);
+    color: var(--card-content-color);
     margin-top: 35vmin;
     margin-left: 2vmin;
     margin-right: 2vmin;
