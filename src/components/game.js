@@ -31,17 +31,21 @@ export default function NewGame({ customDeck, deck }){
 
 // When component mounts:
 useEffect(() => {
+  console.log('Deck props:', { customDeck, deck });
+  
   // Prioritize deck prop, then customDeck, then fallback to default cardList
   const deckToUse = deck?.cards || customDeck || cardList;
   
   // Ensure we're working with an array of card texts
   const cardTexts = Array.isArray(deckToUse) 
-    ? deckToUse 
-    : (deckToUse.map ? deckToUse.map(card => card.text || card) : cardList);
+    ? deckToUse.map(card => typeof card === 'object' ? card.text : card)
+    : (deckToUse.map ? deckToUse.map(card => typeof card === 'object' ? card.text : card) : cardList.map(card => card.text));
+
+  console.log('Card texts:', cardTexts);
 
   const shuffledDeckCopy = [...cardTexts].sort(() => 0.5 - Math.random());
   setDeckOCards(shuffledDeckCopy);
-  setCardText(shuffledDeckCopy[0]);
+  setCardText(shuffledDeckCopy[0] || '');
   setIsShuffled(true);
 }, [customDeck, deck]); 
 
@@ -52,10 +56,12 @@ useEffect(() => {
  * 
  */
   function handleCyclerClick(){
+    console.log('Current deck:', deckOCards);
+    console.log('Current index:', currIndex);
       
     const nextIndex = (currIndex + 1) % deckOCards.length;
     setCurrIndex(nextIndex);
-    setCardText(deckOCards[nextIndex]);
+    setCardText(deckOCards[nextIndex] || '');
   }
      
     return(
@@ -68,6 +74,21 @@ useEffect(() => {
               onClick={handleCyclerClick}>
                     <RestartAltIcon fontSize='inherit'/>
               </IconButton>
+              
+              {/* Small Banner Ad */}
+              <div style={{
+                width: '100%', 
+                height: '50px', 
+                backgroundColor: '#f0f0f0', 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center',
+                margin: '10px 0',
+                border: '1px solid #ddd'
+              }}>
+                <span style={{color: '#888'}}>Advertisement</span>
+              </div>
+
             {/* <CardCyclerButton onClick={handleCyclerClick} /> */}
         </div>
     );
