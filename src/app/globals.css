@@ -140,7 +140,7 @@ a {
 .gameCards{
   position: inherit;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: 'Gaegu', cursive;
+  font-family: 'Gaegu',  ;
   font-size: 7vmin;
   color: hsl(360, 67%, 44%);
   text-align: center;

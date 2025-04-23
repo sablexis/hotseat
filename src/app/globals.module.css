@@ -137,11 +137,11 @@ a {
 .gameCards{
   position: inherit;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: 'Gaegu', cursive;
+  font-family: 'Gaegu',  ;
   font-size: 7vmin;
   font-weight: 400; 
   font-style: regular;
-  color: hsl(42, 15%, 13%);
+  color: hsl(360, 67%, 44%);
   text-align: center;
   width: 70vmin;
   aspect-ratio: 5/7;
