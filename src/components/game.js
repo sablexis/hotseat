@@ -15,6 +15,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import "./game.css"
 import useTheme from '@mui/material';
 import { cardList } from './cardData';
+import AdComponent from './AdComponent';
 
 
 export default function NewGame({ customDeck, deck }){
@@ -90,6 +91,7 @@ useEffect(() => {
               </div>
 
             {/* <CardCyclerButton onClick={handleCyclerClick} /> */}
+          <AdComponent/>
         </div>
     );
 }
