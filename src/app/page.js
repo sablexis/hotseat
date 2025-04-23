@@ -20,29 +20,41 @@ const Home = async () => {
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
           <ThemeToggle />
         </Box>
-        <h2>hot seat: the game 🔥</h2>
+        <div className="content-wrapper">
+          <h2 className="title">
+          hot seat: the game
+          <span className="title-emoji bounce">🔥</span>
+          </h2>
+          <div className="btn-container">
+              {session ? (
+              <Button variant="contained" href="/api/auth/signout?callbackUrl=/">
+                Logout
+              </Button>
+              ) : (
+              <Button variant="contained" href="/api/auth/signin?callbackUrl=/">
+                Login
+              </Button>
+              )}
+            <Button
+              className="new-game-btn"
+              variant="outlined"
+              startIcon={<PlayCircleOutlineOutlinedIcon />}
+              href="/startAGame"
+            >
+              New Game!
+            </Button>
 
-        {session ? (
-          <Button variant="contained" href="/api/auth/signout?callbackUrl=/">
-            Logout
-          </Button>
-        ) : (
-          <Button variant="contained" href="/api/auth/signin?callbackUrl=/">
-            Login
-          </Button>
-        )}
-      
-        <div className="newGameBtnDiv">
-          <Button variant="outlined" startIcon={<PlayCircleOutlineOutlinedIcon />} href="/startAGame">
-            New Game!
-          </Button>
-        </div>
-        <div className="MemArea">
-          {session && (
-            <Button variant="contained" href="/Member">
+            {session && (
+            <Button
+              className="member-area-btn"
+              variant="contained"
+              href="/Member"
+            >
               My Decks 
             </Button>
           )}
+
+          </div>
         </div>
       </div>
     </section>
