@@ -10,12 +10,13 @@
 import React, {useEffect, useState} from 'react';
 import Cards from './cards';
 import { getRandomItem } from './cardData';
-import { IconButton } from '@mui/material';
+import { IconButton, Dialog, DialogTitle, List, ListItem } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import "./game.css"
-import useTheme from '@mui/material';
 import { cardList } from './cardData';
 import AdComponent from './AdComponent';
+
 
 
 export default function NewGame({ customDeck, deck }){
@@ -25,6 +26,12 @@ export default function NewGame({ customDeck, deck }){
   const [deckOCards, setDeckOCards] = useState([])
   const [isShuffled, setIsShuffled] = useState(false)
   const [currIndex, setCurrIndex] = useState(0)
+  const [open, setOpen] = useState(true);
+  
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 /* 
  * Initial deck setup, initial shuffle
@@ -68,27 +75,26 @@ useEffect(() => {
     return(
       
         <div className="gameSpace">
-
+      <meta name="viewport" content="initial-scale=1, width=device-width" />
+          <Dialog open = {open}>
+                <DialogTitle align="center">Hot Seat:<br></br> The Drinking Game 🔥</DialogTitle>
+                <List>
+                      <ListItem alignItems="flex-start">Designate who's up first and the following order of players</ListItem>
+                      <ListItem alignItems="flex-start">The player on the hot seat picks who they'd like a question from</ListItem>
+                      <ListItem alignItems="flex-start">The person who's been picked to ask a question asks their question, If the question is one you wish not to ask, you must drink and tap 'new card' to pull a new card from the pile</ListItem>
+                      <ListItem alignItems="flex-start">If the hot seat player wishes not to answer they must drink</ListItem>
+                </List>
+              <IconButton color="custom"
+              onClick={handleClose}>
+              <HighlightOffIcon/>
+              </IconButton>
+            </Dialog>
               <Cards cardText={cardText} />
               <IconButton size='large'
               color='secondary'
               onClick={handleCyclerClick}>
                     <RestartAltIcon fontSize='inherit'/>
               </IconButton>
-              
-              {/* Small Banner Ad */}
-              <div style={{
-                width: '100%', 
-                height: '50px', 
-                backgroundColor: '#f0f0f0', 
-                display: 'flex', 
-                justifyContent: 'center', 
-                alignItems: 'center',
-                margin: '10px 0',
-                border: '1px solid #ddd'
-              }}>
-                <span style={{color: '#888'}}>Advertisement</span>
-              </div>
 
             {/* <CardCyclerButton onClick={handleCyclerClick} /> */}
           <AdComponent/>
