@@ -8,6 +8,7 @@ A fun little test project made in ReactJS to make the pre that much easier than 
 
 ## Features
 
+Create an account and build your own decks.
 Generate a new question on each click.
 
 ## Contributing
@@ -17,8 +18,8 @@ If you'd like to contribute to this project, please fork the repository and use 
 ## Feature Request
 Please feel free to submit feature request [here](https://google.com)
 
-  - [ ] Ability for users to submit their own cards.
-  - [ ] Account creation, build your own deck.
+  - [X] Ability for users to submit their own cards.
+  - [X] Account creation, build your own deck.
   - [ ] Play with friends online.
 
 
