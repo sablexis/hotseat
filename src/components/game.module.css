@@ -19,7 +19,9 @@ card-holder {
     position: inherit;
     font-family: 'Gaegu', cursive;
     font-size: 7vmin;
-    color: hsl(42, 15%, 13%);
+    font-weight: 400; 
+    font-style: regular;
+    color: hsl(360, 67%, 44%);
     text-align: center;
     width: 70vmin;
     aspect-ratio: 5/7;

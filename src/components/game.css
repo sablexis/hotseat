@@ -22,6 +22,9 @@
     align-content: center;
     font-family: 'Gaegu', cursive;
     font-size: 7vmin;
+    font-weight: 400; 
+    font-style: regular;
+    color: var(--card-content-color);
     text-align: center;
     width: 70vmin;
     aspect-ratio: 5/7;

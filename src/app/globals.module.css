@@ -139,6 +139,8 @@ a {
   background-color: rgba(0, 0, 0, 0.05);
   font-family: 'Gaegu', cursive;
   font-size: 7vmin;
+  font-weight: 400; 
+  font-style: regular;
   color: hsl(42, 15%, 13%);
   text-align: center;
   width: 70vmin;
