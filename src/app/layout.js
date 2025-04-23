@@ -1,9 +1,12 @@
 import AuthProvider from "@/components/AuthProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Inter } from "next/font/google";
+import { Inter, Gaegu } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const gaegu = Gaegu({ 
+  weight: '400',
+  subsets: ["latin"] });
 
 export const metadata = {
   title: "hotseat ",
