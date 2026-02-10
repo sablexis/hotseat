@@ -1,59 +1,106 @@
 "use client"
 
 import { useState } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 
-export default function Component() {
+export default function SignInForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState("")
+  const router = useRouter()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Sign in with:", { email, password })
+    setIsLoading(true)
+    setError("")
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        setError("Invalid credentials. Please try again.")
+      } else {
+        router.push("/")
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const handleGoogleSignIn = () => {
-    // Handle Google sign in
-    console.log("Sign in with Google")
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true)
+    try {
+      await signIn("google", { callbackUrl: "/" })
+    } catch (error) {
+      setError("Failed to sign in with Google")
+      setIsLoading(false)
+    }
   }
 
-  const handleDiscordSignIn = () => {
-    // Handle Discord sign in
-    console.log("Sign in with Discord")
+  const handleDiscordSignIn = async () => {
+    setIsLoading(true)
+    try {
+      await signIn("discord", { callbackUrl: "/" })
+    } catch (error) {
+      setError("Failed to sign in with Discord")
+      setIsLoading(false)
+    }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        <div className="bg-white rounded-3xl shadow-xl p-8 space-y-6">
-          {/* Animated Fire Emoji */}
+    <div className="min-h-screen w-full flex items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="w-full max-w-[420px] animate-fade-in">
+        <div className="bg-white p-10 space-y-8 rounded-2xl shadow-lg">
+          {/* Logo/Icon */}
           <div className="text-center">
-            <div className="inline-block animate-bounce-slow text-4xl">🔥</div>
+            <div className="inline-block text-4xl">🔥</div>
           </div>
 
+          {/* Error Message */}
+          {error && (
+            <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
+
           {/* Sign In Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-700 font-medium">
-                Email
+              <Label 
+                htmlFor="email" 
+                className="text-sm font-medium text-gray-900"
+              >
+                Email or Username
               </Label>
               <Input
                 id="email"
-                type="email"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="h-12 rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                placeholder="Enter your email or username"
+                className="w-full h-12 px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:ring-2 focus:ring-primary"
+                disabled={isLoading}
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-700 font-medium">
+              <Label 
+                htmlFor="password" 
+                className="text-sm font-medium text-gray-900"
+              >
                 Password
               </Label>
               <Input
@@ -62,16 +109,18 @@ export default function Component() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="h-12 rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
+                className="w-full h-12 px-4 py-3 border rounded-lg text-base transition-all duration-200 focus:ring-2 focus:ring-primary"
+                disabled={isLoading}
                 required
               />
             </div>
 
             <Button
               type="submit"
-              className="w-full h-12 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl shadow-lg transition-all duration-200 transform hover:scale-[1.02]"
+              disabled={isLoading}
+              className="w-full h-12 font-semibold text-base rounded-lg bg-primary text-white hover:bg-primary/90 transition-all duration-200 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign In
+              {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
 
@@ -79,8 +128,9 @@ export default function Component() {
           <div className="space-y-3">
             <Button
               onClick={handleGoogleSignIn}
+              disabled={isLoading}
               variant="outline"
-              className="w-full h-12 rounded-xl border-gray-200 hover:bg-gray-50 font-medium transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center gap-3 bg-transparent"
+              className="w-full h-12 rounded-lg font-medium bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -105,8 +155,9 @@ export default function Component() {
 
             <Button
               onClick={handleDiscordSignIn}
+              disabled={isLoading}
               variant="outline"
-              className="w-full h-12 rounded-xl border-gray-200 hover:bg-gray-50 font-medium transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center gap-3 bg-transparent"
+              className="w-full h-12 rounded-lg font-medium bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 transition-all duration-200 transform hover:scale-[1.02] flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="#5865F2" viewBox="0 0 24 24">
                 <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
@@ -117,11 +168,11 @@ export default function Component() {
 
           {/* Sign Up Link */}
           <div className="text-center pt-4">
-            <p className="text-gray-600 text-sm">
+            <p className="text-sm text-gray-600">
               {"Don't have an account? "}
               <Link
-                href="/signup"
-                className="text-blue-500 font-semibold hover:text-blue-600 transition-colors duration-200"
+                href="/Register"
+                className="font-medium text-primary hover:underline transition-colors duration-200"
               >
                 Sign up
               </Link>
@@ -129,20 +180,6 @@ export default function Component() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes bounce-slow {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-8px);
-          }
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 2s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   )
 }

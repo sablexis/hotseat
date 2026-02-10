@@ -2,20 +2,23 @@
 
 import React, {useState, useEffect} from "react";
 import { useRouter } from "next/navigation";
-import { 
-    Button, TextField, Box, Typography, Radio, RadioGroup,
-    FormControlLabel, FormControl, FormLabel, Paper,
-    CircularProgress, Alert, IconButton, MobileStepper, Card, CardContent, Dialog
-  } from '@mui/material';
-  import CloseIcon from '@mui/icons-material/Close';
-  import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-  import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-  import ModeIcon from '@mui/icons-material/Mode';
-  import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-  import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-  import DoneIcon from '@mui/icons-material/Done';
-  import DoDisturbAltIcon from '@mui/icons-material/DoDisturbAlt';
-  import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent } from '@/components/ui/card';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import {
+  X,
+  ChevronRight,
+  ChevronLeft,
+  Edit,
+  Trash2,
+  Check,
+  XCircle,
+  PlusCircle,
+  Pencil
+} from 'lucide-react';
 
 
   // Props & State Setup
@@ -75,13 +78,13 @@ import {
             const response = await fetch(`/api/decks/${deckId}`,{
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json' },
-                body: JSON.stringify({title: deckTitle, cards})
+                body: JSON.stringify({name: deckTitle, cards})
             });
             if (!response.ok) throw new Error('Failed to update deck');
             setSuccessMessage('Deck updated successfully!');
 
         } catch (error) {
-            setError(err.message || 'Failed to update deck');
+            setError(error.message || 'Failed to update deck');
             
         }
         
@@ -158,7 +161,7 @@ import {
         {/* verification */}
 
         // Check if there's actually edited content
-        if (setEditedContent === editedContent) {
+        if (setEditedContent === cards) {
             setError('Cards content not edited')
             return;
         }
@@ -243,285 +246,214 @@ import {
     const nextCard = activeStep < cards.length - 1 ? cards[activeStep + 1] : null;
 
     return (
-        <Box sx={{ width: '100%', position: 'relative' }}>
-            <Box sx={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                gap: 2,
-                my: 4 
-            }}>
-                
-                    
-                    {!isEditingTitle ? (
-                        <Box sx={{ 
-                            display: 'flex', 
-                            alignItems: 'center', 
-                            justifyContent: 'center',
-                            gap: 2,
-                            my: 4 
-                        }}>
-
-                        <Typography variant="h3" component="h3" className="mb-2">
+        <div className="w-full relative">
+            <div className="flex items-center justify-center gap-2 my-4">
+                {!isEditingTitle ? (
+                    <div className="flex items-center justify-center gap-2 my-4">
+                        <h3 className="text-3xl font-semibold mb-2">
                             {deckTitle}
-                        </Typography>
+                        </h3>
 
-                        <IconButton 
-                        onClick={() => { 
-                            setIsEditingTitle(true);
-                        }}
-                        color = "primary">
-                            <ModeEditOutlineIcon />
-                        </IconButton>
-
-                        </Box>
-                
-                ):(
-                    <Box>
-                        <TextField id="outlined-basic" 
-                            label="Edit Title" 
-                            variant="outlined"
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setIsEditingTitle(true)}
+                        >
+                            <Pencil className="h-4 w-4" />
+                        </Button>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-2">
+                        <Input
+                            placeholder="Edit Title"
                             value={editedTitle}
-                            onChange={handleTitleChange} 
-                            
+                            onChange={handleTitleChange}
+                            className="max-w-sm"
                         />
-                        <IconButton 
+                        <Button
+                            variant="ghost"
+                            size="icon"
                             onClick={handleTitleSave}
-                            color="primary"
-                            
                         >
-                            <DoneIcon />
-                        </IconButton>
+                            <Check className="h-4 w-4" />
+                        </Button>
 
-                        <IconButton 
-                            onClick={() => { 
-                                setIsEditingTitle(false);
-                            }}
-                            color="primary"
-                            
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setIsEditingTitle(false)}
                         >
-                            <DoDisturbAltIcon />
-                        </IconButton>
-                    </Box>
-                    
+                            <XCircle className="h-4 w-4" />
+                        </Button>
+                    </div>
                 )}
-            </Box>
+            </div>
         {/* Card Display Area */}
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          gap: 2,
-          my: 4 
-        }}>
+        <div className="flex items-center justify-center gap-2 my-4">
           {/* Previous Card - slightly smaller and to the left */}
           {previousCard && (
-            <Card sx={{ 
-              opacity: 0.7, 
-              transform: 'scale(0.8)',
-              transition: 'all 0.3s ease' 
-            }}>
+            <Card className="opacity-70 scale-90 transition-all duration-300">
               <CardContent>
-                <Typography>{previousCard}</Typography>
+                <p>{previousCard}</p>
               </CardContent>
             </Card>
           )}
-  
+
           {/* Current Card - larger and prominent */}
-          <Card sx={{ 
-            transform: 'scale(1.1)',
-            zIndex: 1,
-            boxShadow: 3,
-            transition: 'all 0.3s ease'
-          }}>
+          <Card className="scale-110 z-10 shadow-lg transition-all duration-300">
             <CardContent>
-              <Typography>{currentCard}</Typography>
+              <p>{currentCard}</p>
             </CardContent>
-            <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            gap: 1,
-            my: 1 
-            }}>
-                <IconButton
-                onClick={() => {
-                    setIsEditing(true);
-                    setEditingCard(currentCard);
-                    setEditedContent(currentCard);
-                  }}>
-                    <ModeIcon />
-                </IconButton>
-                <IconButton>
-                    <DeleteForeverIcon />
-                </IconButton>
-            </Box>
+            <div className="flex items-center justify-center gap-1 my-1">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                        setIsEditing(true);
+                        setEditingCard(currentCard);
+                        setEditedContent(currentCard);
+                    }}
+                >
+                    <Edit className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon">
+                    <Trash2 className="h-4 w-4" />
+                </Button>
+            </div>
           </Card>
-  
+
           {/* Next Card - slightly smaller and to the right */}
           {nextCard && (
-            <Card sx={{ 
-              opacity: 0.7, 
-              transform: 'scale(0.8)',
-              transition: 'all 0.3s ease' 
-            }}>
+            <Card className="opacity-70 scale-90 transition-all duration-300">
               <CardContent>
-                <Typography>{nextCard}</Typography>
+                <p>{nextCard}</p>
               </CardContent>
             </Card>
           )}
-        </Box>
+        </div>
 
         {/*Step 3: Slide-up Edit Panel*/}
 
-        <Paper
-            sx={{
-                position: 'fixed',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '50%', // Takes up bottom half of screen
-                transform: isEditing ? 'translateY(0)' : 'translateY(100%)',
-                transition: 'transform 0.3s ease-in-out',
-                zIndex: 10,
-                borderTopLeftRadius: 16,
-                borderTopRightRadius: 16,
-                boxShadow: 3,
-                p: 2
+        <div
+            className={`fixed bottom-0 left-0 right-0 h-1/2 transition-transform duration-300 ease-in-out z-10 ${
+                isEditing ? 'translate-y-0' : 'translate-y-full'
+            }`}
+            style={{
+                borderTopLeftRadius: '1rem',
+                borderTopRightRadius: '1rem',
             }}
-            >
+        >
             {/* Step 4: Edit Interface Content */}
-            <Card sx={{ height: '100%', overflow: 'auto' }}>
-                <CardContent>
-                <TextField
-                    fullWidth
-                    multiline
+            <Card className="h-full overflow-auto shadow-lg">
+                <CardContent className="p-4">
+                <Textarea
                     rows={2}
                     value={editedContent}
                     onChange={(e) => setEditedContent(e.target.value)}
-                    sx={{ mb: 1 }}
+                    className="mb-2"
                 />
-                
+
                 {/* Step 5: Action Buttons */}
-                {/* Like having save/cancel buttons on your drawer */}
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
-                    <Button 
-                    onClick={() => {
-                        setIsEditing(false);
-                        setEditingCard(null);
-                    }}
-                    variant="outlined"
+                <div className="flex justify-end gap-2">
+                    <Button
+                        onClick={() => {
+                            setIsEditing(false);
+                            setEditingCard(null);
+                        }}
+                        variant="outline"
                     >
                         Cancel
                     </Button>
-                    <Button 
-                    onClick={handleEditedCardSave}
-                    variant="contained"
+                    <Button
+                        onClick={handleEditedCardSave}
                     >
                         Save
                     </Button>
-                </Box>
+                </div>
                 </CardContent>
             </Card>
-        </Paper>
+        </div>
 
 
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <IconButton onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            <ArrowForwardIosIcon />
-          </IconButton>
-        }
-        backButton={
-          <IconButton onClick={handlePrev} disabled={activeStep === 0}>
-            <ArrowBackIosIcon />
-          </IconButton>
-        }
-        />
+      <div className="flex items-center justify-between mt-4 p-4">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handlePrev}
+          disabled={activeStep === 0}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+
+        <div className="text-sm text-muted-foreground">
+          {activeStep + 1} / {maxSteps}
+        </div>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleNext}
+          disabled={activeStep === maxSteps - 1}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      </div>
 
         {/* Edit interface - only shown when isEditing is true */}
       {isEditing && (
-        <div className="edit-interface">
-          <Box
-            sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            bgcolor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 9
-            }}
-            onClick={() => setIsEditing(false)}
+        <div
+          className="fixed inset-0 bg-black/50 z-[9]"
+          onClick={() => setIsEditing(false)}
         />
-        </div>
-        
       )}
 
-        <Box sx={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                gap: 2,
-                my: 4 
-            }}>
-            <Button variant="contained" href="/Member">
-                Back
+        <div className="flex items-center justify-center gap-2 my-4">
+            <Button variant="outline" asChild>
+                <a href="/Member">Back</a>
             </Button>
 
             {/* Add Card Button */}
             <Button
-            variant="contained"
-            startIcon={<AddCircleIcon />}
-            onClick={() => setIsAddCardOpen(true)}
-            //sx={{ mt: 2 }}
+                onClick={() => setIsAddCardOpen(true)}
             >
-            Add New Card
+                <PlusCircle className="h-4 w-4 mr-2" />
+                Add New Card
             </Button>
-        </Box>
+        </div>
 
             {/* Add Card Dialog */}
-            <Dialog 
-                open={isAddCardOpen} 
-                onClose={() => setIsAddCardOpen(false)}
-                maxWidth="sm"
-                fullWidth
-            >
-                <Box sx={{ p: 3 }}>
-                    <Typography variant="h6" sx={{ mb: 2 }}>
-                        Add New Card
-                    </Typography>
-                    <TextField
-                        fullWidth
-                        multiline
-                        rows={4}
-                        value={newCardText}
-                        onChange={(e) => setNewCardText(e.target.value)}
-                        placeholder="Enter your card text..."
-                        sx={{ mb: 2 }}
-                    />
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
-                        <Button 
-                            onClick={() => setIsAddCardOpen(false)}
-                            variant="outlined"
-                        >
-                            Cancel
-                        </Button>
-                        <Button 
-                            onClick={handleAddCard}
-                            variant="contained"
-                            disabled={!newCardText.trim()}
-                        >
-                            Add Card
-                        </Button>
-                    </Box>
-                </Box>
+            <Dialog open={isAddCardOpen} onOpenChange={setIsAddCardOpen}>
+                <DialogContent className="sm:max-w-md">
+                    <div className="p-3">
+                        <h3 className="text-lg font-semibold mb-4">
+                            Add New Card
+                        </h3>
+                        <Textarea
+                            rows={4}
+                            value={newCardText}
+                            onChange={(e) => setNewCardText(e.target.value)}
+                            placeholder="Enter your card text..."
+                            className="mb-4"
+                        />
+                        <div className="flex justify-end gap-2">
+                            <Button
+                                onClick={() => setIsAddCardOpen(false)}
+                                variant="outline"
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                onClick={handleAddCard}
+                                disabled={!newCardText.trim()}
+                            >
+                                Add Card
+                            </Button>
+                        </div>
+                    </div>
+                </DialogContent>
             </Dialog>
 
-        </Box>
+        </div>
       
         
 

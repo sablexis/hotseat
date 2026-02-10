@@ -17,9 +17,9 @@ card-holder {
 
 .gameCards{
     position: inherit;
-    font-family: 'Gaegu',  ;
+    font-family: var(--font-gaegu);
     font-size: 7vmin;
-    font-weight: 400; 
+    font-weight: 400;
     font-style: regular;
     color: hsl(360, 67%, 44%);
     text-align: center;
@@ -29,7 +29,7 @@ card-holder {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
   }
   
   .gameCards > p {

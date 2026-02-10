@@ -2,17 +2,9 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import Typography from '@mui/material/Typography';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-//import Decks from '@/app/models/Decks';
 
 
 function DeckDialog({onClose, open, deck}) {
@@ -33,21 +25,29 @@ function DeckDialog({onClose, open, deck}) {
   };
 
   return (
-    <Dialog onClose={onClose} open={open}>
-      <List sx={{ pt: 0 }}>
-        
-          <ListItem disablePadding>
-            <ListItemButton onClick={(e) => handleListItemClick(e, "/decks/{deckId}/edit")}>
-              <ListItemText primary="Edit The Deck"/>
-            </ListItemButton>
-          </ListItem>
-        
-        <ListItem disablePadding>
-          <ListItemButton onClick={(e) => handleListItemClick(e, "/decks/{deckId}/play")}>
-            <ListItemText primary="Play with this deck" />
-          </ListItemButton>
-        </ListItem>
-      </List>
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Deck Options</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col gap-2 pt-4">
+          <Button
+            variant="outline"
+            onClick={(e) => handleListItemClick(e, "/decks/{deckId}/edit")}
+            className="w-full justify-start"
+          >
+            Edit The Deck
+          </Button>
+
+          <Button
+            variant="outline"
+            onClick={(e) => handleListItemClick(e, "/decks/{deckId}/play")}
+            className="w-full justify-start"
+          >
+            Play with this deck
+          </Button>
+        </div>
+      </DialogContent>
     </Dialog>
   );
 }

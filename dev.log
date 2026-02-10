@@ -1,0 +1,14 @@
+
+> hot-seat@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ✓ Ready in 2s
+ ○ Compiling /not-found ...
+ ✓ Compiled /not-found in 6.8s (545 modules)
+ ○ Compiling /startAGame ...
+ ✓ Compiled /startAGame in 2.9s (825 modules)
+[?25h

@@ -2,9 +2,13 @@ const mongoose = require('mongoose');
 
 const decksSchema = new mongoose.Schema({
     user: {
-        type: String || mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: mongoose.Schema.Types.Mixed,
         required: true,
+        validate: {
+            validator: function(v) {
+                return typeof v === 'string' || mongoose.Types.ObjectId.isValid(v);
+            },
+        }
     },
     name: {
         type: String,

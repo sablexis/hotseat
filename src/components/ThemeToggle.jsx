@@ -1,23 +1,23 @@
 "use client"
 
-import { IconButton, useTheme } from '@mui/material';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useContext } from 'react';
-import { ColorModeContext } from './ThemeProvider';
+import { useTheme } from "./ui/theme-provider";
 
 export default function ThemeToggle() {
-  const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <IconButton
-      sx={{ ml: 1 }}
-      onClick={colorMode.toggleColorMode}
-      color="inherit"
+    <button
+      onClick={toggleTheme}
       aria-label="toggle theme"
+      style={{
+        background: "none",
+        border: "none",
+        cursor: "pointer",
+        fontSize: 24,
+        marginLeft: 8,
+      }}
     >
-      {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-    </IconButton>
+      {theme === "dark" ? "🌞" : "🌙"}
+    </button>
   );
 }

@@ -20,19 +20,21 @@
 
 .cardWContent{
     align-content: center;
-    font-family: 'Gaegu',  ;
+    font-family: var(--font-gaegu);
     font-size: 7vmin;
-    font-weight: 400; 
+    font-weight: 400;
     font-style: regular;
     color: var(--card-content-color);
+    background-color: rgba(0, 0, 0, 0.05);
     text-align: center;
     width: 70vmin;
     aspect-ratio: 5/7;
     border-radius: 2vmin;
+    border: 1px solid hsl(var(--border));
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
   }
   
   .cardWContent > p {

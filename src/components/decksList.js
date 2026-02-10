@@ -3,7 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { Card, CardContent, Typography, Button, Box, CircularProgress, Alert, Dialog, DialogTitle } from '@mui/material';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2 } from 'lucide-react';
 import DeckDialog from './DeckDialog';
 
 const DecksList = () => {
@@ -13,6 +16,7 @@ const DecksList = () => {
   const [error, setError] = useState(null);
   const [selectedDeck, setSelectedDeck] = useState(null);
   const [open, setOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(null);
 
 
 
@@ -49,24 +53,24 @@ const DecksList = () => {
 
   if (loading) {
     return (
-      <Box className="flex justify-center items-center p-8">
-        <CircularProgress />
-      </Box>
+      <div className="flex justify-center items-center p-8">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Alert severity="error" className="m-4">
-        {error}
+      <Alert variant="destructive" className="m-4">
+        <AlertDescription>{error}</AlertDescription>
       </Alert>
     );
   }
 
   if (!session) {
     return (
-      <Alert severity="info" className="m-4">
-        Please log in to view your decks
+      <Alert className="m-4">
+        <AlertDescription>Please log in to view your decks</AlertDescription>
       </Alert>
     );
   }
@@ -79,46 +83,42 @@ const DecksList = () => {
 
   return (
     <div className="p-4">
-      <Box className="flex justify-between items-center mb-6">
-        <Typography variant="h5" component="h2">
-          My Decks
-        </Typography>
-        <Link href="/newDeckCreator" passHref>
-          <Button variant="contained" color="primary">
-            Create New Deck
-          </Button>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold">My Decks</h2>
+        <Link href="/newDeckCreator">
+          <Button>Create New Deck</Button>
         </Link>
-      </Box>
+      </div>
 
       
 
       {decks.length === 0 ? (
-        <Alert severity="info">
-          You haven't created any decks yet. Create your first deck to get started!
+        <Alert>
+          <AlertDescription>
+            You haven't created any decks yet. Create your first deck to get started!
+          </AlertDescription>
         </Alert>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {decks.map((deck) => (
-           
-            <Card key={deck._id} 
-              className="hover:shadow-lg transition-shadow"
+            <Card
+              key={deck._id}
+              className="hover:shadow-lg transition-shadow cursor-pointer"
               onClick={() => {
-              setSelectedDeck(deck);
-              setOpen(true);
+                setSelectedDeck(deck);
+                setOpen(true);
               }}
-              >
-                
-                
+            >
+              <CardHeader>
+                <CardTitle>{deck.name}</CardTitle>
+              </CardHeader>
               <CardContent>
-                <Typography variant="h6" component="h3" className="mb-2">
-                  {deck.name}
-                </Typography>
-                <Typography color="textSecondary" className="mb-4">
+                <p className="text-muted-foreground mb-2">
                   {deck.cards?.length || 0} cards
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
+                </p>
+                <p className="text-sm text-muted-foreground">
                   Created: {new Date(deck.createdAt).toLocaleDateString()}
-                </Typography>
+                </p>
               </CardContent>
             </Card>
           ))}

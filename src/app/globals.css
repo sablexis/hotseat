@@ -1,248 +1,119 @@
-@import "tailwindcss";
-
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-  --card-content-color: hsl(360, 67%, 44%);
-}
-
-@media (prefers-color-scheme: dark) {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-    --card-content-color: hsl(360, 67%, 44%);
-
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83% 53%;
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: rgb(var(--foreground-rgb));
-  background: 
-    rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
   }
 }
 
-
-.App-link {
-  color: #61dafb;
-}
-
-.card-holder{
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* Game-specific styles */
+.card-holder {
+  @apply absolute inset-0 m-auto flex flex-col justify-center items-center;
   width: 75vmin;
   aspect-ratio: 5/7;
-  
 }
 
-.gameCards{
+.gameCards {
+  @apply relative bg-opacity-5 text-center font-gaegu;
   width: 70vmin;
   aspect-ratio: 5/7;
   border-radius: 2vmin;
-  
-}
-
-.gameCards{
-  position: inherit;
-  background-color: rgba(0, 0, 0, 0.05);
-  font-family: 'Gaegu',  ;
   font-size: 7vmin;
   color: hsl(360, 67%, 44%);
-  text-align: center;
-  width: 70vmin;
-  aspect-ratio: 5/7;
-  border-radius: 2vmin;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
 }
 
 .gameCards > p {
+  @apply flex justify-center items-center flex-col mx-2;
   margin-top: 35vmin;
-  margin-left: 2vmin;
-  margin-right: 2vmin;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  
 }
 
-.rules-card{
-  position: inherit;
-  background-color: rgba(0, 0, 0, 0.05);
+.rules-card {
+  @apply relative bg-opacity-5 text-center list-none;
   font-size: 3vmin;
   color: hsl(42, 15%, 13%);
-  text-align: center;
-  list-style-type: none;
-  list-style-position: inside;
   border-radius: 2vmin;
   width: 70vmin;
   aspect-ratio: 5/7;
-  
 }
 
-.rules-text{
-  margin: 10px, 5px, 5px, 10px;
-  padding: 1.5vmin, 0.5vmin, 0.5vmin, 0.5vmin;
-  
+.rules-text {
+  @apply m-2 p-1;
 }
 
 .ul {
-  padding: inherit;
-  line-height: 2;
-  margin: inherit;
+  @apply leading-loose;
 }
 
 .h5 {
+  @apply text-center mb-5;
   font-family: 'Nunito Sans', sans-serif;
   color: hsl(360, 67%, 44%);
-  text-align: center;
   font-size: 6vmin;
-  margin-bottom: 5vmin;
 }
 
-.LoginFromContainter{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 80%;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.LoginFormInputForm{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1vh;
-  min-width: 80%;
-
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
 }
-
-.LoginFormInputForm > input{
-  margin: 1vh;
-  padding: 2vh;
-  min-width: 80%;
-  border-radius: 7px;
-
-}
-
-.LoginFormInputForm > button{
-  margin: 1vh;
-  padding: 12px 14px;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 0 hsl(0, 0%, 56%);
-}
-
-.decksContainer {
-  position: inherit;
-  width: 70vmin;
-  height: 30vmin;
-  align-items: center;
-
-}
-
-.gaegu-regular {
-  font-family: "Gaegu", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');

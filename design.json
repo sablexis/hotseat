@@ -1,0 +1,169 @@
+{
+  "designSystemName": "ModernAuthForm",
+  "version": "1.0.0",
+  "description": "A design system for a clean, modern authentication form with social login options. It features a central card layout, a friendly color palette, rounded corners, and a clear visual hierarchy to guide the user.",
+  "tokens": {
+    "colors": {
+      "primary": {
+        "default": "hsl(221, 83%, 53%)",
+        "hover": "hsl(221, 83%, 48%)",
+        "text": "hsl(0, 0%, 100%)"
+      },
+      "background": {
+        "page": "hsl(220, 18%, 97%)",
+        "card": "hsl(0, 0%, 100%)",
+        "interactiveHover": "hsl(220, 18%, 95%)"
+      },
+      "text": {
+        "primary": "hsl(215, 28%, 17%)",
+        "secondary": "hsl(217, 8%, 45%)",
+        "placeholder": "hsl(215, 16%, 65%)",
+        "link": "hsl(221, 83%, 53%)"
+      },
+      "border": {
+        "default": "hsl(210, 16%, 87%)",
+        "focus": "hsl(221, 83%, 53%)"
+      },
+      "social": {
+        "discord": "hsl(235, 86%, 65%)"
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+      },
+      "fontSize": {
+        "sm": "0.875rem",
+        "base": "1rem",
+        "lg": "1.125rem",
+        "icon": "2rem"
+      },
+      "fontWeight": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600
+      }
+    },
+    "spacing": {
+      "xs": "0.25rem",
+      "sm": "0.5rem",
+      "md": "1rem",
+      "lg": "1.5rem",
+      "xl": "2rem",
+      "xxl": "2.5rem"
+    },
+    "borderRadius": {
+      "md": "0.5rem",
+      "lg": "1rem",
+      "full": "9999px"
+    },
+    "shadows": {
+      "card": "0px 10px 25px -5px hsla(220, 20%, 80%, 0.4), 0px 8px 10px -6px hsla(220, 20%, 80%, 0.2)"
+    },
+    "structure": {
+      "container": {
+        "description": "The main card holding the form content.",
+        "maxWidth": "420px",
+        "padding": "var(--spacing-xxl)",
+        "backgroundColor": "var(--colors-background-card)",
+        "borderRadius": "var(--borderRadius-lg)",
+        "boxShadow": "var(--shadows-card)"
+      },
+      "layout": {
+        "description": "Defines the flow and spacing of elements within the container.",
+        "display": "flex",
+        "flexDirection": "column",
+        "alignItems": "stretch",
+        "gap": {
+          "logoToForm": "var(--spacing-xl)",
+          "fieldToField": "var(--spacing-md)",
+          "formToActions": "var(--spacing-lg)",
+          "actionToAction": "var(--spacing-md)",
+          "actionsToFooter": "var(--spacing-xl)"
+        }
+      }
+    },
+    "components": {
+      "button": {
+        "base": {
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "width": "100%",
+          "padding": "0.75rem 1rem",
+          "borderRadius": "var(--borderRadius-md)",
+          "fontSize": "var(--fontSize-base)",
+          "fontWeight": "var(--fontWeight-semibold)",
+          "transition": "background-color 0.2s ease-in-out, border-color 0.2s ease-in-out"
+        },
+        "primary": {
+          "extends": "button.base",
+          "backgroundColor": "var(--colors-primary-default)",
+          "color": "var(--colors-primary-text)",
+          "border": "1px solid transparent",
+          "hover": {
+            "backgroundColor": "var(--colors-primary-hover)"
+          }
+        },
+        "secondary": {
+          "extends": "button.base",
+          "backgroundColor": "var(--colors-background-card)",
+          "color": "var(--colors-text-primary)",
+          "border": "1px solid var(--colors-border-default)",
+          "iconGap": "var(--spacing-sm)",
+          "hover": {
+            "backgroundColor": "var(--colors-background-interactiveHover)"
+          }
+        }
+      },
+      "inputField": {
+        "wrapper": {
+          "display": "flex",
+          "flexDirection": "column",
+          "gap": "var(--spacing-sm)"
+        },
+        "label": {
+          "fontSize": "var(--fontSize-sm)",
+          "fontWeight": "var(--fontWeight-medium)",
+          "color": "var(--colors-text-primary)"
+        },
+        "input": {
+          "width": "100%",
+          "padding": "0.625rem 0.875rem",
+          "backgroundColor": "var(--colors-background-card)",
+          "border": "1px solid var(--colors-border-default)",
+          "borderRadius": "var(--borderRadius-md)",
+          "fontSize": "var(--fontSize-base)",
+          "color": "var(--colors-text-primary)",
+          "placeholder": {
+            "color": "var(--colors-text-placeholder)"
+          },
+          "focus": {
+            "borderColor": "var(--colors-border-focus)",
+            "boxShadow": "0 0 0 3px hsla(221, 83%, 53%, 0.1)"
+          }
+        }
+      },
+      "link": {
+        "color": "var(--colors-text-link)",
+        "fontWeight": "var(--fontWeight-medium)",
+        "textDecoration": "none",
+        "hover": {
+          "textDecoration": "underline"
+        }
+      },
+      "formFooter": {
+        "display": "flex",
+        "justifyContent": "center",
+        "gap": "var(--spacing-xs)",
+        "fontSize": "var(--fontSize-sm)",
+        "color": "var(--colors-text-secondary)"
+      },
+      "logo": {
+        "display": "flex",
+        "justifyContent": "center",
+        "fontSize": "var(--fontSize-icon)"
+      }
+    }
+  }
+}

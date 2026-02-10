@@ -9,7 +9,7 @@ export async function POST(req){
         
         //confirm existence
         if(!userData?.email || !userData.password){
-            return NextResponse().json({message: "All fields required", err}, {status: 400});
+            return NextResponse.json({message: "All fields required", err}, {status: 400});
         }
 
         //check duplicates

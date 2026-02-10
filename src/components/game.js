@@ -9,13 +9,21 @@
 //import 'src/app/page.js';
 import React, {useEffect, useState} from 'react';
 import Cards from './cards';
+import { IconRotate } from '@tabler/icons-react';
 import { getRandomItem } from './cardData';
-import { IconButton, Dialog, DialogTitle, List, ListItem } from '@mui/material';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog"
 import "./game.css"
 import { cardList } from './cardData';
-import AdComponent from './AdComponent';
+import { Button } from "@/components/ui/button"
 
 
 
@@ -26,16 +34,14 @@ export default function NewGame({ customDeck, deck }){
   const [deckOCards, setDeckOCards] = useState([])
   const [isShuffled, setIsShuffled] = useState(false)
   const [currIndex, setCurrIndex] = useState(0)
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(false);
   
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
 /* 
  * Initial deck setup, initial shuffle
  */
+
+
 
 // When component mounts:
 useEffect(() => {
@@ -73,31 +79,40 @@ useEffect(() => {
   }
      
     return(
-      
-        <div className="gameSpace">
-      <meta name="viewport" content="initial-scale=1, width=device-width" />
-          <Dialog open = {open}>
-                <DialogTitle align="center">Hot Seat:<br></br> The Drinking Game 🔥</DialogTitle>
-                <List>
-                      <ListItem alignItems="flex-start">Designate who's up first and the following order of players</ListItem>
-                      <ListItem alignItems="flex-start">The player on the hot seat picks who they'd like a question from</ListItem>
-                      <ListItem alignItems="flex-start">The person who's been picked to ask a question asks their question, If the question is one you wish not to ask, you must drink and tap 'new card' to pull a new card from the pile</ListItem>
-                      <ListItem alignItems="flex-start">If the hot seat player wishes not to answer they must drink</ListItem>
-                </List>
-              <IconButton color="custom"
-              onClick={handleClose}>
-              <HighlightOffIcon/>
-              </IconButton>
-            </Dialog>
-              <Cards cardText={cardText} />
-              <IconButton size='large'
-              color='secondary'
-              onClick={handleCyclerClick}>
-                    <RestartAltIcon fontSize='inherit'/>
-              </IconButton>
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col items-center justify-center p-4">
+        <div className="relative flex flex-col items-center justify-center w-full max-w-4xl">
+          {/* Rules button positioned above the card */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="mb-4">Rules</Button>
+            </DialogTrigger>
 
-            {/* <CardCyclerButton onClick={handleCyclerClick} /> */}
-          <AdComponent/>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Hot Seat:<br></br> The Drinking Game 🔥</DialogTitle>
+                <DialogDescription>
+                   Designate who's up first and the following order of players. The player on the hot seat reads their random question/action aloud. If the question is one you wish not to ask, you must drink and tap 'new card' to pull a new card from the pile, if the question is directed at another player and they wish not to answer they must drink.
+                </DialogDescription>
+              </DialogHeader>
+
+              <DialogClose asChild>
+                <Button variant="outline">Close</Button>
+              </DialogClose>
+            </DialogContent>
+          </Dialog>
+
+          {/* Card content */}
+          <Cards cardText={cardText} />
+
+          {/* Cycle button below the card */}
+          <div className="flex items-center gap-2 mt-4">
+            <Button variant="secondary" size="icon" className="size-8" onClick={handleCyclerClick}>
+              <IconRotate />
+            </Button>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }

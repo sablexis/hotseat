@@ -1,5 +1,6 @@
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials"
 import User from "@/app/models/User";
 import bcrypt from "bcryptjs";
@@ -43,13 +44,28 @@ export const options = {
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
         }),
+
+        DiscordProvider({
+            profile(profile){
+                console.log("Discord Profile: ", profile);
+
+                let userRole = "Discord User";
+                return{
+                    ...profile,
+                    id: profile.id,
+                    role: userRole,
+                };
+            },
+            clientId: process.env.DISCORD_CLIENT_ID,
+            clientSecret: process.env.DISCORD_CLIENT_SECRET,
+        }),
         CredentialsProvider({
             name: "Credentials",
             credentials: {
               email: {
                 label: "email:",
                 type: "text",
-                placeholder: "your-email",
+                placeholder: "your-email-or-username",
               },
               password: {
                 label: "password:",
@@ -59,7 +75,13 @@ export const options = {
             },
             async authorize(credentials) {
               try {
-                const foundUser = await User.findOne({ email: credentials.email })
+                // Try to find user by email first, then by name (username)
+                const foundUser = await User.findOne({
+                  $or: [
+                    { email: credentials.email },
+                    { name: credentials.email }
+                  ]
+                })
                   .lean()
                   .exec();
       

@@ -6,8 +6,8 @@ import styles from './page.module.css';
 import "./globals.css";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
-import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
-import { Button, Box } from "@mui/material";
+import { Button } from "@/components/ui/button"
+import { IconPlayerPlay } from "@tabler/icons-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const Home = async () => {
@@ -17,9 +17,7 @@ const Home = async () => {
     <section className={styles.Home}>
       <div className="firstPage">
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
-          <ThemeToggle />
-        </Box>
+        <ThemeToggle />
         <div className="content-wrapper">
           <h2 className="title">
           hot seat: the game
@@ -27,32 +25,31 @@ const Home = async () => {
           </h2>
           <div className="btn-container">
               {session ? (
-              <Button variant="contained" href="/api/auth/signout?callbackUrl=/">
-                Logout
-              </Button>
+                <Button variant="default" asChild>
+                  <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>
+                </Button>
               ) : (
-              <Button variant="contained" href="/api/auth/signin?callbackUrl=/">
-                Login
-              </Button>
+                <Button variant="default" asChild>
+                  <Link href="/api/auth/signin?callbackUrl=/">Login</Link>
+                </Button>
               )}
             <Button
               className="new-game-btn"
-              variant="outlined"
-              startIcon={<PlayCircleOutlineOutlinedIcon />}
-              href="/startAGame"
+              variant="outline"
+              asChild
             >
-              New Game!
+              <Link href="/startAGame"><IconPlayerPlay /> New Game!</Link>
             </Button>
 
             {session && (
-            <Button
-              className="member-area-btn"
-              variant="contained"
-              href="/Member"
-            >
-              My Decks 
-            </Button>
-          )}
+              <Button
+                className="member-area-btn"
+                variant="default"
+                asChild
+              >
+                <Link href="/Member">My Decks</Link>
+              </Button>
+            )}
 
           </div>
         </div>

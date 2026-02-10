@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
 
 :root {
   --max-width: 1100px;
@@ -139,9 +142,9 @@ a {
 .gameCards{
   position: inherit;
   background-color: rgba(0, 0, 0, 0.05);
-  font-family: 'Gaegu',  ;
+  font-family: var(--font-gaegu);
   font-size: 7vmin;
-  font-weight: 400; 
+  font-weight: 400;
   font-style: regular;
   color: hsl(360, 67%, 44%);
   text-align: center;
@@ -151,7 +154,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
 }
 
 .gameCards > p {

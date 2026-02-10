@@ -1,12 +1,17 @@
-import AuthProvider from "@/components/AuthProvider";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { Inter, Gaegu } from "next/font/google";
+import ClientLayout from "@/components/ClientLayout";
+import { Lexend, Gaegu } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-const gaegu = Gaegu({ 
+const lexend = Lexend({
+  subsets: ["latin"],
+  variable: '--font-lexend'
+});
+
+const gaegu = Gaegu({
   weight: '400',
-  subsets: ["latin"] });
+  subsets: ["latin"],
+  variable: '--font-gaegu'
+});
 
 export const metadata = {
   title: "hotseat ",
@@ -15,16 +20,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3327430877137663"
-     crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <ThemeProvider>
-        <AuthProvider>
-          <body className={inter.className}>{children}</body>
-        </AuthProvider>
-      </ThemeProvider>
+      <body className={`${lexend.variable} ${gaegu.variable} min-h-screen`}>
+        <ClientLayout>{children}</ClientLayout>
+      </body>
     </html>
   );
 }
