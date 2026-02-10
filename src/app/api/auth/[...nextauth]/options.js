@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import User from "@/app/models/User";
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth/next";
+import dbConnect from "@/lib/db";
 
 export const options = {
     secret: process.env.NEXT_AUTH_SECRET,
@@ -75,11 +76,14 @@ export const options = {
             },
             async authorize(credentials) {
               try {
-                // Try to find user by email first, then by name (username)
+                // Connect to database
+                await dbConnect();
+
+                // Try to find user by email first, then by username
                 const foundUser = await User.findOne({
                   $or: [
                     { email: credentials.email },
-                    { name: credentials.email }
+                    { username: credentials.email }
                   ]
                 })
                   .lean()

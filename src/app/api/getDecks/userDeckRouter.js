@@ -1,11 +1,8 @@
-import NextAuth from "next-auth";
-import { NextResponse } from "next/server";
-import {options} from "./options";
 const express = require('express');
 const router = express.Router();
 // schema models
 const Deck = require('../models/Decks');
-const User = require('./models/User');
+const User = require('../../models/User');
 
 router.post('/add-question', async (req, res) => {
   // Implementation from the previous response

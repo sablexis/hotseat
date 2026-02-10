@@ -1,24 +1,43 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+    trim: true,
+    lowercase: true,
+  },
+  username: {
+    type: String,
+    required: [true, 'Username is required'],
+    unique: true,
+    trim: true,
+    minLength: [3, 'Username must be at least 3 characters long'],
+  },
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+  },
+  name: {
+    type: String,
+  },
+  decks: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Decks'
+  }]
+}, {
+  timestamps: true,
+});
 
+// Prevent password from being sent to client
+userSchema.set('toJSON', {
+  transform: function(doc, ret) {
+    delete ret.password;
+    return ret;
+  }
+});
 
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
-    const userSchema = new mongoose.Schema({
-        name: String,
-        email: String,
-        password: String,
-    },{
-        timestamps: true,
-        decks: [{type: mongoose.Schema.Types.ObjectID, ref: 'Decks'}]
-    }
-    );
-    // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-    export default mongoose.models.User || mongoose.model('User', userSchema);
-
-
-
-
-
-
-
-//;
+export default User;
