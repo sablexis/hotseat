@@ -23,7 +23,7 @@ const Home = async () => {
           hot seat: the game
           <span className="title-emoji bounce">🔥</span>
           </h2>
-          <div className="btn-container">
+          <div id="btn-container" className="flex flex-col gap-2">
               {session ? (
                 <Button variant="default" asChild>
                   <Link href="/api/auth/signout?callbackUrl=/">Logout</Link>

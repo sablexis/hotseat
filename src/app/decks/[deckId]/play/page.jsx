@@ -1,9 +1,10 @@
 "use client"
 
-import {React, useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import NewGame from "@/components/game";
-import { Box, Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 
 
 const PlayWithDecks = () => {
@@ -13,7 +14,7 @@ const PlayWithDecks = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    
+
 
     useEffect(() => {
         const fetchDeck = async () => {
@@ -37,17 +38,16 @@ const PlayWithDecks = () => {
     if (!deck) return <div>No deck found</div>;
 
         return(
-            <Box>
-            <Box>
-                <NewGame deck={deck} />
-                
-            </Box>
-            <Box>
-                <Button variant="contained" href="/Member">
-                    Back
-                </Button>
-            </Box>
-            </Box>
+            <div>
+                <div>
+                    <NewGame deck={deck} />
+                </div>
+                <div className="mt-4">
+                    <Link href="/Member">
+                        <Button>Back</Button>
+                    </Link>
+                </div>
+            </div>
 
         );
 

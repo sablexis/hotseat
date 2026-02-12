@@ -1,17 +1,15 @@
 import React from 'react';
-import { IconButton } from '@mui/material';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { RotateCw } from 'lucide-react';
 //import { cardCycler } from './GameCards';
 
 
 function CardCyclerButton(props) {
     return(
-        <IconButton
-        color= "primary" 
-        size = "large"
+        <button
+        className="p-2 hover:bg-gray-100 rounded-full transition-colors"
         onClick={props.onClick}>
-            <RestartAltIcon fontSize='inherit'/>
-        </IconButton>
+            <RotateCw size={32} className="text-primary" />
+        </button>
     )
 }
 

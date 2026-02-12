@@ -1,11 +1,11 @@
 "use client"
-// depreciated 
+// depreciated
 import React, {useState} from "react";
 
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
-import { Button } from "@mui/material";
+import { Button } from "@/components/ui/button";
 
 export default function NewCards(){
 
@@ -19,7 +19,7 @@ export default function NewCards(){
 const CreateDeck = () => {
     const [title, setTitle] = useState('');
     const [questions, setQuestions] = useState([]);
-  
+
     const handleAddQuestion = (newQuestion) => {
       setQuestions([...questions, newQuestion]);
     };
@@ -34,9 +34,9 @@ const CreateDeck = () => {
 
     return(
         <div>
-            <Button variant="contained" href="/Member">
-               Back
-            </Button>
+            <Link href="/Member">
+                <Button>Back</Button>
+            </Link>
         </div>
     )
 

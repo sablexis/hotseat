@@ -1,33 +1,27 @@
 'use client'
-import {React, useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import { CircularProgress } from '@mui/material'
-import EditDeck from '@/components/DeckEditor'
 import DeckEditor from '@/components/DeckEditor'
-
-// Access deck ID
-
+import { Spinner } from "@/components/ui/spinner"
 
 const fetchDeck = async (deckId) => {
-    const response = await fetch(`/api/decks/${deckId}`)
-    return response.json()
-  }
-
-  async function getDeck(deckId) {
-    const deck = await Decks.findById(deckId)
-    return deck
-  }
+  const response = await fetch(`/api/decks/${deckId}`)
+  return response.json()
+}
 
 export default function Page() {
-    // params.deckId available directly
-
-    const { deckId } = useParams()
-    const [deck, setDeck] = useState(null)
-    
+  const { deckId } = useParams()
+  const [deck, setDeck] = useState(null)
 
   useEffect(() => {
     fetchDeck(deckId).then(setDeck)
   }, [deckId])
 
-  return deck ? <DeckEditor deck={deck} deckId={deckId} /> : <CircularProgress />
-  }
+  return deck ? <DeckEditor deck={deck} deckId={deckId} /> : <Spinner />
+}
+
+// THINGS LEFT TO DO
+// shift some ui around from hot dog to hamburger
+// add register link to signup page
+// github redirect uri + google 
+// check editing flow

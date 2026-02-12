@@ -1,21 +1,12 @@
-import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
+"use client"
+
 import DecksList from "@/components/decksList";
 
-
-const Member = async () => {
-  const session = await getServerSession(options);
-
-  if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/Member");
-  }
-
+const Member = () => {
   return (
     <div className="container mx-auto">
-        <DecksList />
+      <DecksList />
     </div>
-
   );
 };
 
