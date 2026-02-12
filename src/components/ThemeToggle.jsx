@@ -17,15 +17,6 @@ export default function ThemeToggle() {
       )}
 
     </Button>
-    /*
-      aria-label="toggle theme"
-      style={{
-        background: "none",
-        border: "none",
-        cursor: "pointer",
-        fontSize: 24,
-        marginLeft: 8,
-      }}
-      */
+   
   );
 }
