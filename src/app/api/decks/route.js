@@ -18,20 +18,22 @@ export async function GET(request) {
 
         // 2. Connect to database
         await dbConnect();
-        
+
         // 3. Convert the user ID to a valid ObjectId or handle string ID
+        const userId = session.user.id;
         let query;
+
         try {
             // Try to create an ObjectId from the user.id
-            if (mongoose.Types.ObjectId.isValid(session.user.id)) {
-                query = { user: new mongoose.Types.ObjectId(session.user.id) };
+            if (mongoose.Types.ObjectId.isValid(userId)) {
+                query = { user: new mongoose.Types.ObjectId(userId) };
             } else {
                 // If it's not a valid ObjectId, use the string directly
-                query = { user: session.user.id };
+                query = { user: userId };
             }
         } catch (error) {
             console.error('Error converting ID:', error);
-            query = { user: session.user.id };
+            query = { user: userId };
         }
 
         // 4. Fetch user's decks with the appropriate query

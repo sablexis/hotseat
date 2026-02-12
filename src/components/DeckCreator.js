@@ -1,16 +1,25 @@
 /**
  * Functionality for users to create their own decks
  */
+"use client"
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
 import { cardList } from '@/components/cardData';
-import { 
-  Button, TextField, Box, Typography, Radio, RadioGroup,
-  FormControlLabel, FormControl, FormLabel, Paper,
-  CircularProgress, Alert, IconButton
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { X } from "lucide-react"
+import { Spinner } from "@/components/ui/spinner"
 
 const DeckCreator = () => {
   const [deckType, setDeckType] = useState('');
@@ -22,6 +31,7 @@ const DeckCreator = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Handler for deck type selection
+  /*
   const handleDeckTypeChange = (event) => {
     const type = event.target.value;
     setDeckType(type);
@@ -32,6 +42,7 @@ const DeckCreator = () => {
       setCards([]); // Empty array for scratch deck
     }
   };
+  */
 
   // Handler for adding new card
   const handleAddCard = (e) => {
@@ -106,85 +117,76 @@ const DeckCreator = () => {
   };
 
   return (
-    <Box className="p-6">
-      <Paper className="p-6">
-        <Typography variant="h5" className="mb-4">Create New Deck</Typography>
+    <div className="p-6">
+      <Card className="p-6">
+        <h5 className="mb-4">Create New Deck</h5>
         
         {/* Success Message */}
         {successMessage && (
-          <Alert 
-            severity="success" 
-            className="mb-4"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => setSuccessMessage('')}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-          >
-            {successMessage}
+          <Alert>
+            <AlertDescription className="flex justify-between items-center">
+              {successMessage}
+              <Button variant="outline" size="icon" onClick={() => setSuccessMessage('')}>
+                  <X className="h-4 w-4" />
+              </Button>
+            </AlertDescription>
           </Alert>
         )}
 
         {/* Error Message */}
         {error && (
           <Alert 
-            severity="error" 
-            className="mb-4"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => setError('')}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-          >
-            {error}
+            variant="destructive">
+              <AlertDescription className="flex justify-between items-center">
+                {error}
+                <Button variant="ghost" size="icon" onClick={() => setError('')}>
+                  <X className="h-4 w-4" />
+                </Button>
+              </AlertDescription> 
           </Alert>
         )}
 
         {/* Deck Type Selection */}
-        <FormControl component="fieldset" className="mb-4">
-          <FormLabel>Choose Deck Type</FormLabel>
-          <RadioGroup value={deckType} onChange={handleDeckTypeChange}>
-            <FormControlLabel 
-              value="base" 
-              control={<Radio />} 
-              label="Start with Base Deck" 
-            />
-            <FormControlLabel 
-              value="scratch" 
-              control={<Radio />} 
-              label="Start from Scratch" 
-            />
+        <div>
+          <Label>Choose Deck Type</Label>
+          <RadioGroup value={deckType} onValueChange={(type) => {
+            setDeckType(type);
+            if (type === 'base') {
+              setCards(cardList.map(card => card.text));              
+            } else {
+              setCards([]);
+            }
+          }}
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="base" id="base" />
+              <Label htmlFor="base">Start with Base Deck</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="scratch" id="scratch" />
+              <Label htmlFor="scratch">Start from scratch</Label>
+           </div>
           </RadioGroup>
-        </FormControl>
+        </div>
 
         {/* Show deck creation form only after type selection */}
         {deckType && (
           <>
             {/* Deck Title Input */}
-            <TextField
-              fullWidth
-              label="Deck Title"
-              value={deckTitle}
-              onChange={(e) => setDeckTitle(e.target.value)}
-              className="mb-4"
-              disabled={isSubmitting}
-            />
+            <div className="w-full">
+                <Label htmlFor="deck-title">Deck Title</Label>
+                  <Input
+                    id="deck-title"
+                    value={deckTitle}
+                    onChange={(e) => setDeckTitle(e.target.value)}
+                  />
+            </div>
 
             {/* New Card Input */}
-            <Box className="flex gap-2 mb-4">
-              <TextField
-                fullWidth
-                label="Add New Card"
+            <div className="flex gap-2 mb-4">
+              <Label htmlFor="new-card">Add New Card</Label>
+              <Input
+                id="new-card"
                 value={newCard}
                 onChange={(e) => setNewCard(e.target.value)}
                 disabled={isSubmitting}
@@ -194,59 +196,53 @@ const DeckCreator = () => {
                     handleAddCard(e);
                   }
                 }}
-              />
-              <Button 
-                variant="contained" 
+                />
+              
+              <Button
                 onClick={handleAddCard}
                 disabled={isSubmitting}
                 className="whitespace-nowrap"
               >
                 Add Card
               </Button>
-            </Box>
+            </div>
 
             {/* Cards Display */}
-            <Box className="mb-4">
-              <Typography variant="h6" className="mb-2">
+            <div className="mb-4">
+              <h6 className="mb-2 text-lg font-semibold">
                 Cards ({cards.length}):
-              </Typography>
-              <Box className="max-h-60 overflow-y-auto">
+              </h6>
+              <div className="max-h-60 overflow-y-auto">
                 {cards.map((card, index) => (
-                  <Box 
+                  <div 
                     key={index} 
                     className="p-2 mb-2 bg-gray-100 rounded flex justify-between items-center"
                   >
-                    <Typography className="pr-2">{card}</Typography>
-                    <IconButton
-                      size="small"
-                      onClick={() => handleRemoveCard(index)}
-                      disabled={isSubmitting}
-                    >
-                      <CloseIcon />
-                    </IconButton>
-                  </Box>
+                    <p className="pr-2">{card}</p>
+                    <Button variant="outline" size="icon" onClick={() => handleRemoveCard(index)} disabled={isSubmitting}>
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
                 ))}
-              </Box>
-            </Box>
+              </div>
+            </div>
 
             {/* Save Button */}
             <Button 
-              variant="contained" 
-              color="primary" 
               onClick={handleSaveDeck}
               disabled={isSubmitting}
-              fullWidth
+              className="w-full"
             >
               {isSubmitting ? (
-                <CircularProgress size={24} color="inherit" />
+                <Spinner />
               ) : (
                 'Save Deck'
               )}
             </Button>
           </>
         )}
-      </Paper>
-    </Box>
+      </Card>
+    </div>
   );
 };
 

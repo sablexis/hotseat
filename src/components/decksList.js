@@ -85,7 +85,7 @@ const DecksList = () => {
     <div className="p-4">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-semibold">My Decks</h2>
-        <Link href="/newDeckCreator">
+        <Link href="/new-deck-creator">
           <Button>Create New Deck</Button>
         </Link>
       </div>
@@ -124,11 +124,13 @@ const DecksList = () => {
           ))}
         </div>
       )}
-      <DeckDialog 
-        open={open}
-        onClose={() => setOpen(false)}
-        deck={selectedDeck}  // Pass the entire deck object
-      />
+      {selectedDeck && (
+        <DeckDialog
+          open={open}
+          onClose={() => setOpen(false)}
+          deck={selectedDeck}
+        />
+      )}
 
     </div>
   );
