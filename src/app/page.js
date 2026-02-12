@@ -15,9 +15,12 @@ const Home = async () => {
 
   return(
     <section className={styles.Home}>
+      <div className="fixed bottom-20 right-6 z-50">
+        <ThemeToggle />
+      </div>
+
       <div className="firstPage">
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <ThemeToggle />
         <div className="content-wrapper">
           <h2 className="title">
           hot seat: the game
