@@ -20,8 +20,3 @@ export default function Page() {
   return deck ? <DeckEditor deck={deck} deckId={deckId} /> : <Spinner />
 }
 
-// THINGS LEFT TO DO
-// shift some ui around from hot dog to hamburger
-// add register link to signup page
-// github redirect uri + google 
-// check editing flow

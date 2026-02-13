@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import LoginForm from "../../../components/LoginForm"
 
 export default function SignInForm() {
   const [email, setEmail] = useState("")
@@ -60,22 +61,33 @@ export default function SignInForm() {
   }
 
   return (
+    <LoginForm
+      email={email}
+      password={password}
+      error={error}
+      isLoading={isLoading}
+      onEmailChange={setEmail}
+      onPasswordChange={setPassword}
+      onSubmit={handleSubmit}
+      onGoogleSignIn={handleGoogleSignIn}
+    />
+    /*
     <div className="min-h-screen w-full flex items-center justify-center p-4 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="w-full max-w-[420px] animate-fade-in">
         <div className="bg-white p-10 space-y-8 rounded-2xl shadow-lg">
-          {/* Logo/Icon */}
+          {/* Logo/Icon */ /*
           <div className="text-center">
             <div className="inline-block text-4xl">🔥</div>
           </div>
 
-          {/* Error Message */}
+          {/* Error Message */ /* 
           {error && (
             <div className="p-3 rounded-lg bg-red-50 border border-red-200">
               <p className="text-sm text-red-600">{error}</p>
             </div>
           )}
 
-          {/* Sign In Form */}
+          {/* Sign In Form */ /*
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label 
@@ -124,7 +136,7 @@ export default function SignInForm() {
             </Button>
           </form>
 
-          {/* Social Sign In Buttons */}
+          {/* Social Sign In Buttons */ /*
           <div className="space-y-3">
             <Button
               onClick={handleGoogleSignIn}
@@ -166,7 +178,7 @@ export default function SignInForm() {
             </Button>
           </div>
 
-          {/* Sign Up Link */}
+          {/* Sign Up Link */ /*
           <div className="text-center pt-4">
             <p className="text-sm text-gray-600">
               {"Don't have an account? "}
@@ -181,5 +193,7 @@ export default function SignInForm() {
         </div>
       </div>
     </div>
+    */
   )
+
 }

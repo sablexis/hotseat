@@ -6,9 +6,16 @@ import User from "@/app/models/User";
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth/next";
 import dbConnect from "@/lib/db";
+import { signIn } from "next-auth/react";
 
 export const options = {
+
     secret: process.env.NEXT_AUTH_SECRET,
+
+    pages: {
+    signIn: '/auth/signin',
+    },
+    
     providers: [
 
         GitHubProvider({
@@ -46,7 +53,7 @@ export const options = {
             clientSecret: process.env.GOOGLE_SECRET,
         }),
 
-        DiscordProvider({
+        /* DiscordProvider({
             profile(profile){
                 console.log("Discord Profile: ", profile);
 
@@ -59,7 +66,7 @@ export const options = {
             },
             clientId: process.env.DISCORD_CLIENT_ID,
             clientSecret: process.env.DISCORD_CLIENT_SECRET,
-        }),
+        }), */
         CredentialsProvider({
             name: "Credentials",
             credentials: {
